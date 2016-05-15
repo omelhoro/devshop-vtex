@@ -1,0 +1,26 @@
+{
+  "parser"  : "babel-eslint",
+  "extends" : [
+    "standard",
+    "airbnb",
+    "standard-react"
+  ],
+  "env"     : {
+    "browser" : true
+  },
+  "globals" : {
+    "__DEV__"      : false,
+    "__PROD__"     : false,
+    "__DEBUG__"    : false,
+    "__COVERAGE__" : false,
+    "__BASENAME__" : false
+  },
+  "rules": {
+    "max-len": [2, 120, 2],
+    "arrow-body-style": [0],
+    "object-curly-spacing": ["error", "never"],
+    "no-console": 0,
+    "allow-bind": 0,
+    "jsx-first-prop-new-line": 0
+  }
+}

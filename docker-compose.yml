@@ -1,0 +1,21 @@
+version: '2'
+services:
+  devshop-vtex:
+    image: omelhoro1/devshop-vtex
+    container_name: devshop-vtex
+    ports:
+      - "3000:3000"
+    volumes:
+      - /tmp/db:/app/db
+    environment:
+      - VIRTUAL_HOST=devshop-vtex.igor-fischer.rocks
+      - LETSENCRYPT_HOST=devshop-vtex.igor-fischer.rocks
+      - VIRTUAL_NETWORK=proxy-tier
+      - VIRTUAL_PORT=5000
+      - LETSENCRYPT_EMAIL=fischerig@outlook.com
+    networks:
+      - proxy-tier
+
+networks:
+  proxy-tier:
+    external: true
