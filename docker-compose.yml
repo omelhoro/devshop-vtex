@@ -3,8 +3,8 @@ services:
   devshop-vtex:
     image: omelhoro1/devshop-vtex
     container_name: devshop-vtex
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     volumes:
       - /tmp/db:/app/db
     environment:
