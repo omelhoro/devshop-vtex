@@ -52,4 +52,4 @@ if (isDeveloping) {
   });
 }
 
-export default app
+export default app;
