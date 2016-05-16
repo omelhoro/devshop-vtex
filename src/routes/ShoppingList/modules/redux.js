@@ -12,6 +12,7 @@ const USECOUPON = 'USECOUPON';
 const SETTOKEN = 'SETTOKEN';
 const SETSTATE = 'SETSTATE';
 export const RESETSTATE = 'RESETSTATE';
+export const CHANGEPAGE = 'CHANGEPAGE';
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -69,6 +70,13 @@ export function loadState(state) {
   return {
     type: SETSTATE,
     state,
+  };
+}
+
+export function changePage(page) {
+  return {
+    type: CHANGEPAGE,
+    page,
   };
 }
 
@@ -159,6 +167,7 @@ export function useCoupon(event) {
 
 export const actions = {
   addToCard,
+  changePage,
   removeFromCard,
   addDevFromOrg,
   addDevFromName,
@@ -197,6 +206,18 @@ const ACTION_HANDLERS = {
     return ixAdd === -1 ?
       {...preState, ...calculateSum(preState)} :
       state;
+  },
+  [CHANGEPAGE]: (state, action) => {
+    if (action.page < 0) {
+      return state;
+    }
+
+    if (action.page > (state.pages - 1)) {
+      return state;
+    }
+
+    const newState = {...state, currentPage: action.page};
+    return newState;
   },
   [SETTOKEN]: (state, action) => {
     return {
@@ -244,7 +265,8 @@ const ACTION_HANDLERS = {
   },
   [SETDEVLIST]: (state, action) => {
     const developers = _.uniq(state.developers.concat(action.devs), e => e.login);
-    return ({...state, developers});
+    const pages = Math.ceil(developers.length / state.devsOnPage);
+    return ({...state, developers, pages});
   },
   [REMOVEFROMCARD]: (state, action) => {
     const ixRemove = _.findIndex(state.shoppingcard, e => e.login === action.item.login);
