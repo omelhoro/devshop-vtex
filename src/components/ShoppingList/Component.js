@@ -3,7 +3,7 @@ import classes from './Component.scss';
 import * as _ from 'lodash';
 
 const listElement = (ctx) => (
-  <div className="well">
+  <div className="well developer-entry" id={`${ctx.e.login}-data`}>
     <div className="media">
       <div className="media-left media-middle">
         <a href="#">
@@ -38,12 +38,12 @@ const listElement = (ctx) => (
             </tr>
             <tr>
               <td>Estimated price (hourly)</td>
-              <td>{ctx.e.appAdded.price}$</td>
+              <td><span className="price">{ctx.e.appAdded.price}</span>$</td>
             </tr>
             <tr>
               <td>Ordered hours</td>
               <td>
-                <input className="form-control" value={ctx.e.appAdded.orderedHours} disabled={ctx.e.isInCard} onChange={ctx
+                <input className="form-control hours" value={ctx.e.appAdded.orderedHours} disabled={ctx.e.isInCard} onChange={ctx
                   .calculatePrice
                   .bind(null, ctx.e)} type="number"/>
               </td>
@@ -52,14 +52,14 @@ const listElement = (ctx) => (
         </table>
 
         <div className="">
-          <button style={{
+          <button disabled={!ctx.e.appAdded.orderedHours} style={{
             display: ctx.e.isInCard
               ? 'none'
               : 'inherit'
-          }} className="btn btn-block btn-success" onClick={ctx
+          }} className="btn btn-block btn-success add-to-card" onClick={ctx
             .addToCard
-            .bind(null, ctx.e)}>Add {ctx.e.login}
-            to card for {ctx.e.appAdded.totalSum}$
+            .bind(null, ctx.e)}>
+            Add {ctx.e.login} to card for {ctx.e.appAdded.totalSum}$
           </button>
           <button className="btn btn-block btn-warning" style={{
             display: ctx.e.isInCard
@@ -88,9 +88,9 @@ const dv = e => document
   .value;
 
 const priceFormatWithDiscount = ({sumOriginal, discount, sum}) => (
-  <div>
+  <div className="text-center">
     <h4 style={{display: discount ? 'inherit' : 'none'}}>{sumOriginal}$ - {discount}%</h4>
-    <h2>{sum.toFixed(0)}$</h2>
+    <h2><span id="total-sum">{sum}</span>$</h2>
   </div>
 )
 
@@ -115,7 +115,7 @@ export const ShoppingList = (props) => (
           </span>
           <input id="dev-name" className="form-control" type="text" placeholder="e.g. omelhoro"/>
           <span className="input-group-btn">
-            <button className="btn btn-default" type="button" onClick={() => props.addDevFromName(dv('#dev-name'))}>
+            <button id="import-developer" className="btn btn-default" type="button" onClick={() => props.addDevFromName(dv('#dev-name'))}>
               Import!
             </button>
           </span>
@@ -135,7 +135,7 @@ export const ShoppingList = (props) => (
           </span>
           <input id="org-name" className="form-control" type="text" placeholder="e.g. Homebrew"/>
           <span className="input-group-btn">
-            <button className="btn btn-default" type="button" onClick={() => props.addDevFromOrg(dv('#org-name'))}>
+            <button id="import-organization" className="btn btn-default" type="button" onClick={() => props.addDevFromOrg(dv('#org-name'))}>
               Import!
             </button>
           </span>
@@ -144,7 +144,7 @@ export const ShoppingList = (props) => (
     </div>
 
     <div className="row">
-      <div className="col-sm-8">
+      <div id="developers-list" className="col-sm-8">
         {props
           .developers
           .map(e => listElement({
@@ -172,12 +172,12 @@ export const ShoppingList = (props) => (
 
         <div className="input-group">
           <span className="input-group-addon">Coupon</span>
-          <input placeholder="SHIPIT" value={props.coupon} onChange={props.useCoupon} className="form-control" type="text" />
+          <input id="coupon-entry" placeholder="SHIPIT" value={props.coupon} onChange={props.useCoupon} className="form-control" type="text" />
         </div>
 
           {priceFormatWithDiscount(props)}
 
-          <button data-toggle="modal" data-target="#confirmModal" className="btn btn-block btn-info">
+          <button id="open-modal-confirm" data-toggle="modal" data-target="#confirmModal" className="btn btn-block btn-info">
             Order
           </button>
         </div>
@@ -210,7 +210,7 @@ export const ShoppingList = (props) => (
             <p style={{
                 display: props.token ? 'inherit' : 'none',
               }}>
-              Your token is: {props.token}. You can now close this window.
+              Your token is: <span id="order-token">{props.token}</span>. You can now close this window.
             </p>
 
           </div>
@@ -219,11 +219,11 @@ export const ShoppingList = (props) => (
             <button type="button" className="btn btn-default" data-dismiss="modal" style={{
                 display: props.token ? 'none' : 'inline',
               }}>Close</button>
-            <button type="button" style={{
+            <button id="send-order-button"  type="button" style={{
                 display: props.token ? 'none' : 'inline',
               }} onClick={() => props.sendOrder(dv('#user-email'))} className="btn btn-success">Send order</button>
 
-            <button className="btn btn-primary" data-dismiss="modal"
+            <button id="reset-view-button" className="btn btn-primary" data-dismiss="modal"
               style={{
                   display: props.token ? 'inline' : 'none',
                 }}
