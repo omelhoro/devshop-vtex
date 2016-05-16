@@ -6,6 +6,7 @@ export const shoppinglist = {
   devsOnPage: 5,
   currentPage: 0,
   pages: 1,
+  loading: false,
   timestamp: '',
   developers: [],
   shoppingcard: [],

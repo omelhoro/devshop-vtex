@@ -82,8 +82,19 @@ describe('(Redux Module) Counter', () => {
       state = reducer(state, redux.setToken(token))
       expect(state.token).to.eql(token)
     })
-
   })
+
+  describe('(Action Handler) LOADINGSTATE', () => {
+    it('Should set the token of the shoppingcard', () => {
+      let state = reducer(undefined, {})
+      state = reducer(state, redux.setLoadingState(true))
+      expect(state.loading).to.eql(true)
+
+      state = reducer(state, redux.setLoadingState(false))
+      expect(state.loading).to.eql(false)
+    })
+  })
+
 
   describe('(Action Handler) SETPRICE', () => {
     it('Should calculate the price of an developer', () => {

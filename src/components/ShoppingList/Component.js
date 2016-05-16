@@ -94,6 +94,17 @@ const dv = e => document
   .querySelector(e)
   .value;
 
+const loadingBar = (props) => (
+  <div className="row">
+    <div className="col-sm-8">
+      <div className="progress">
+        <div className="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{width: '100%'}}>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const priceFormatWithDiscount = ({sumOriginal, discount, sum}) => (
   <div className="text-center">
     <h4 style={{display: discount ? 'inherit' : 'none'}}>{sumOriginal}$ - {discount}%</h4>
@@ -110,7 +121,9 @@ const pagination = (props) => (
   <ul
     className="pagination"
     style={{
-      display: props.pages > 1 ? 'flex' : 'none',
+      display: props.pages > 1 ? 'table' : 'none',
+      margin: '0 auto',
+      marginBottom: 10,
     }}
   >
     <li>
@@ -129,19 +142,19 @@ const pagination = (props) => (
 
 export const ShoppingList = (props) => (
   <div>
-    <h2 className={classes.counterContainer}>
+    <h5 className={classes.counterContainer}>
       Devs in Shopping Card: {' '}
       <span className={classes['counter--green']}>
         {props.shoppingcard.length}
       </span>
-    </h2>
+    </h5>
 
     <div
       className="row" style={{
-        margin: 10,
+        marginBottom: 10,
       }}
     >
-      <div className="col-sm-7">
+      <div className="col-sm-8">
         <div className="input-group">
           <span
             className="input-group-addon" style={{
@@ -165,10 +178,10 @@ export const ShoppingList = (props) => (
 
     <div
       className="row" style={{
-        margin: 10,
+        marginBottom: 10,
       }}
     >
-      <div className="col-sm-7">
+      <div className="col-sm-8">
         <div className="input-group">
           <span
             className="input-group-addon" style={{
@@ -190,10 +203,11 @@ export const ShoppingList = (props) => (
       </div>
     </div>
 
+    {props.loading ? loadingBar(props) : ''}
 
-    {pagination(props)}
     <div className="row">
       <div id="developers-list" className="col-sm-8">
+        {pagination(props)}
         {props
           .developers
           .slice(props.currentPage * props.devsOnPage, (props.currentPage + 1) * props.devsOnPage)
@@ -201,6 +215,7 @@ export const ShoppingList = (props) => (
             e,
             ...props,
           }))}
+          {pagination(props)}
       </div>
 
       <div className="col-sm-4">
@@ -248,7 +263,6 @@ export const ShoppingList = (props) => (
       </div>
     </div>
 
-    {pagination(props)}
 
     <div
       id="confirmModal" className="modal fade text-center"
