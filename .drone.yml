@@ -1,5 +1,7 @@
 build:
   image: node
+  commands:
+    - npm test
 deploy:
   rsync:
     user: $$PROD_USER
