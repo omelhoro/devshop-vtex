@@ -3,8 +3,8 @@ const express = require('express');
 const config = require('../build/webpack.config').default;
 const bodyParser = require('body-parser');
 
-import {getMembersOfOrg, getDeveloper} from './lib/githubApi';
-import {processOrder, getOrder} from './lib/processOrder';
+import {getMembersOfOrg, getDeveloper} from './api/githubApi';
+import {processOrder, getOrder} from './api/processOrder';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 

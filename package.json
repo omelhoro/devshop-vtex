@@ -20,6 +20,10 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
+    "test-ui": "protractor tests-ui/conf.js",
+    "test-unitserver": "mocha --harmony --reporter spec --compilers js:babel-register --compilers ls:livescript tests-unitserver",
+    "test-integration": "mocha --harmony --reporter spec --compilers js:babel-register --compilers ls:livescript tests-integration",
+    "test-unitclient": "better-npm-run test",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
@@ -115,6 +119,7 @@
     "koa-static": "^2.0.0",
     "leveldown": "^1.4.6",
     "levelup": "^1.3.1",
+    "livescript": "^1.5.0",
     "mailgun-js": "^0.7.11",
     "moment": "^2.13.0",
     "node-sass": "^3.7.0",

@@ -4,16 +4,14 @@ import {shoppinglist} from '../../../store/initState';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT';
 export const ADDTOCARD = 'ADDTOCARD';
 export const REMOVEFROMCARD = 'REMOVEFROMCARD';
-export const ADDFROMORG = 'ADDFROMORG';
-export const SETDEVLIST = 'SETDEVLIST';
-export const SETPRICE = 'SETPRICE';
-export const USECOUPON = 'USECOUPON';
+const SETDEVLIST = 'SETDEVLIST';
+const SETPRICE = 'SETPRICE';
+const USECOUPON = 'USECOUPON';
 const SETTOKEN = 'SETTOKEN';
 const SETSTATE = 'SETSTATE';
-const RESETSTATE = 'RESETSTATE';
+export const RESETSTATE = 'RESETSTATE';
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -60,14 +58,14 @@ export function addDevFromName(dev) {
   }
 }
 
-function setToken(token) {
+export function setToken(token) {
   return {
     type: SETTOKEN,
     token,
   };
 }
 
-function loadState(state) {
+export function loadState(state) {
   return {
     type: SETSTATE,
     state,
@@ -134,7 +132,7 @@ function calculateSum(state) {
   }
   return {
     sumOriginal,
-    sum: sum.toFixed(0),
+    sum: Math.round(sum),
   };
 }
 
@@ -175,10 +173,12 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state, action) => ({...state, counter: state.counter + action.payload}),
   [ADDTOCARD]: (state, action) => {
-    const ixAdd = state.shoppingcard.findIndex(e => e.login === action.item.login);
-    const ixIsInCard = state.developers.findIndex(e => e.login === action.item.login);
+    const ixAdd = _.findIndex(state.shoppingcard, e => e.login === action.item.login);
+    const ixIsInCard = _.findIndex(state.developers, e => e.login === action.item.login);
+    if (ixIsInCard === -1) {
+      return state;
+    }
 
     const developer = {...state.developers[ixIsInCard], isInCard: true};
 
@@ -205,7 +205,7 @@ const ACTION_HANDLERS = {
     };
   },
   [SETPRICE]: (state, action) => {
-    const ixIsInCard = state.developers.findIndex(e => e.login === action.item.login);
+    const ixIsInCard = _.findIndex(state.developers, e => e.login === action.item.login);
     const devOld = state.developers[ixIsInCard];
     const devNew = {
       ...devOld,
@@ -240,20 +240,20 @@ const ACTION_HANDLERS = {
     }
   },
   [RESETSTATE]: (state, action) => {
-    return {...state, ...shoppinglist};
+    return {...shoppinglist};
   },
   [SETDEVLIST]: (state, action) => {
     const developers = _.uniq(state.developers.concat(action.devs), e => e.login);
     return ({...state, developers});
   },
   [REMOVEFROMCARD]: (state, action) => {
-    const ixRemove = state.shoppingcard.findIndex(e => e.login === action.item.login);
+    const ixRemove = _.findIndex(state.shoppingcard, e => e.login === action.item.login);
     const shoppingcard = [
       ...state.shoppingcard.slice(0, ixRemove),
       ...state.shoppingcard.slice(ixRemove + 1),
     ];
 
-    const ixIsInCard = state.developers.findIndex(e => e.login === action.item.login);
+    const ixIsInCard = _.findIndex(state.developers, e => e.login === action.item.login);
     const developers = [
       ...state.developers.slice(0, ixIsInCard),
       {...state.developers[ixIsInCard], isInCard: false},

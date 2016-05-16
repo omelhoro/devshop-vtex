@@ -17,7 +17,7 @@ function getParameterByName(name, url) {
 
 
 const listElement = (ctx, e) => (
-  <div className="well">
+  <div className="well developer-entry">
     <div className="media">
       <div className="media-left media-middle">
         <a href="#">

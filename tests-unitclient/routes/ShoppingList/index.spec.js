@@ -1,10 +1,10 @@
-import CounterRoute from 'routes/Counter'
+import ShoppingList from 'routes/ShoppingList'
 
-describe('(Route) Counter', () => {
+describe('(Route) ShoppingList', () => {
   let _route
 
   beforeEach(() => {
-    _route = CounterRoute({})
+    _route = ShoppingList({})
   })
 
   it('Should return a route configuration object', () => {
@@ -12,7 +12,7 @@ describe('(Route) Counter', () => {
   })
 
   it('Configuration should contain path `counter`', () => {
-    expect(_route.path).to.equal('counter')
+    expect(_route.path).to.equal('shoppinglist')
   })
 
 })

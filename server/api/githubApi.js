@@ -1,12 +1,12 @@
 const BP = require('bluebird');
-import {errorHandler} from './utils';
+import {errorHandler, calculateHoursPrice} from '../lib/utils';
 import {github as githubCreds} from '../../vault/credentials';
 const GitHubApi = require('github');
 const github = new GitHubApi({
   // required
   version: '3.0.0',
   // optional
-  debug: true,
+  // debug: true,
   protocol: 'https',
   host: 'api.github.com', // should be api.github.com for GitHub
   // pathPrefix: '/api/v3', // for some GHEs; none for GitHub
@@ -22,17 +22,9 @@ github.authenticate({
   password: githubCreds.password,
 });
 
-function calculateHours(e) {
-  const years = (new Date().getUTCFullYear() - new Date(e.created_at).getUTCFullYear()) * 2;
-  const publicRepos = (e.public_repos / 5);
-  const publicGists = (e.public_gists / 4);
-  const followers = (e.followers / 4);
-  return Math.floor(years + publicRepos + publicGists + followers);
-}
-
 async function getSingleUser(user) {
   const out = await BP.promisify(github.user.getFrom)({user: user.login});
-  return {...out, appAdded: {price: calculateHours(out), orderedHours: 0}};
+  return {...out, appAdded: {price: calculateHoursPrice(out), orderedHours: 0}};
 }
 
 async function getMembersOfOrgAsync(req, res) {
