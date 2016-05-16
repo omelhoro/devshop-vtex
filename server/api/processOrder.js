@@ -23,7 +23,7 @@ async function processOrderAsync(req, res) {
 async function getOrderAsync(req, res) {
   // const value = await BP.promisify(db.get)(req.query.token);
   db.get(req.query.token, (err, value) => {
-    res.send(JSON.parse(value));
+    res.send(JSON.parse(value || '{}'));
   });
 }
 
