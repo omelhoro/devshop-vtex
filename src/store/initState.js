@@ -3,13 +3,13 @@ export const shoppinglist = {
   token: '',
   coupon: '',
   sum: 0,
+  devsOnPage: 5,
+  currentPage: 0,
+  pages: 1,
   timestamp: '',
-  developers: [
-  ],
-  shoppingcard: [
-  ],
-  organizations: [
-  ],
+  developers: [],
+  shoppingcard: [],
+  organizations: [],
 };
 
 export const shoppingcard = {
@@ -19,4 +19,4 @@ export const shoppingcard = {
 export default {
   shoppinglist,
   shoppingcard,
-}
+};
