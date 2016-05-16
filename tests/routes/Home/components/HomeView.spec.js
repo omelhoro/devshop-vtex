@@ -10,15 +10,15 @@ describe('(View) Home', () => {
   })
 
   it('Renders a welcome message', () => {
-    const welcome = _component.find('h4')
+    const welcome = _component.find('h2#first-h2')
     expect(welcome).to.exist
-    expect(welcome.text()).to.match(/Welcome!/)
+    expect(welcome.text()).to.match(/Objetivo/)
   })
 
   it('Renders an awesome duck image', () => {
     const duck = _component.find('img')
     expect(duck).to.exist
-    expect(duck.attr('alt')).to.match(/This is a duck, because Redux!/)
+    expect(duck.attr('alt')).to.match(/Imgur/)
   })
 
 })
