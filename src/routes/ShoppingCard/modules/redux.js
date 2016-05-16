@@ -1,7 +1,8 @@
+import {shoppingcard} from '../../../store/initState';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+export const COUNTER_INCREMENT = 'COUNTER_INCREMENT';
 const SETSTATE = 'SETSTATE';
 // ------------------------------------
 // Actions
@@ -33,7 +34,7 @@ export function loadState(token) {
 
 export const actions = {
   loadState,
-}
+};
 
 // ------------------------------------
 // Action Handlers
@@ -41,15 +42,15 @@ export const actions = {
 const ACTION_HANDLERS = {
   [SETSTATE]: (state, action) => {
     return {...state, ...action.state};
-  }
-}
+  },
+};
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0
+const initialState = shoppingcard;
 export default function counterReducer(state = initialState, action) {
-  const handler = ACTION_HANDLERS[action.type]
+  const handler = ACTION_HANDLERS[action.type];
 
-  return handler ? handler(state, action) : state
+  return handler ? handler(state, action) : state;
 }
