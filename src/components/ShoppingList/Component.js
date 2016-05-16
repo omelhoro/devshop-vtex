@@ -140,6 +140,10 @@ const pagination = (props) => (
   </ul>
 );
 
+const redirect = (token) => {
+  location.href = `${location.origin}/shoppingcard?token=${token}`;
+};
+
 export const ShoppingList = (props) => (
   <div>
     <h5 className={classes.counterContainer}>
@@ -324,9 +328,9 @@ export const ShoppingList = (props) => (
               style={{
                 display: props.token ? 'inline' : 'none',
               }}
-              onClick={props.endOrdering}
+              onClick={redirect.bind(null, props.token)}
             >
-            Reset the view
+            Go to the order
             </button>
 
           </div>
