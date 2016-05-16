@@ -33,7 +33,5 @@ windows:
       layout: tile
       pre: cd app
       panes:
-        - 
-        - gulp watch
         - npm run dev
-        - ggull
+        - 
