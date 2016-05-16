@@ -3,6 +3,13 @@
 
 https://devshop-vtex.igor-fischer.rocks
 
+How to start locally with live reload?
+
+    npm i
+    npm run dev
+
+And then go to http://localhost:3000
+
 ## Tarefas e priorização
 
 * Determinar o preço do desenvolvedor a partir de informações do seu perfil do GitHub, como por exemplo: followers, repos, stars, commits, etc.
