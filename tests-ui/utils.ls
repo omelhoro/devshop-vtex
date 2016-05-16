@@ -3,7 +3,7 @@ export typeDev = (name, cb) ->
   <- item.clear! .then!
   <- item.sendKeys name .then!
   <- $ '#import-developer' .click! .then!
-  <- browser.sleep 1500 .then cb
+  <- browser.sleep 2000 .then cb
 
 export typeOrg = (name, cb) ->
   item = $ '#org-name'
