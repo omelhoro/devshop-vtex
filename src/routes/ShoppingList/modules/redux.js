@@ -159,7 +159,7 @@ function calculateSum(state) {
   }
   return {
     sumOriginal,
-    sum,
+    sum: sum.toFixed(0),
   };
 }
 
