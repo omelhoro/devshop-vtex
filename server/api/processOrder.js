@@ -15,7 +15,7 @@ async function processOrderAsync(req, res) {
       return;
     }
 
-    sendToken({to: req.body.email, token}, (err, body) => console.log(err, body));
+    sendToken({to: req.body.email, token}, console.log);
     res.send({token});
   });
 }
