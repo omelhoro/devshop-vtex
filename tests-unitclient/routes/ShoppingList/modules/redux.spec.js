@@ -147,6 +147,34 @@ describe('(Redux Module) Counter', () => {
 
   })
 
+  describe('(Action Handler) CHANGEPAGE', () => {
+    it('Should change pages correctly', () => {
+      let state = reducer(undefined, {})
+      state = reducer(state, redux.addToDevList([
+        testDev,
+        {login: 'ASD'},
+        {login: 'MNM'},
+        {login: 'OI'},
+        {login: 'MMAAN'},
+        {login: 'OIJO'}]))
+
+      expect(state.pages).to.eql(2)
+
+      state = reducer(state, redux.changePage(1))
+      expect(state.currentPage).to.eql(1)
+
+      state = reducer(state, redux.changePage(9))
+      expect(state.currentPage).to.eql(1)
+
+      state = reducer(state, redux.changePage(0))
+      expect(state.currentPage).to.eql(0)
+
+      state = reducer(state, redux.changePage(-99))
+      expect(state.currentPage).to.eql(0)
+
+    })
+  })
+
   describe('(Action Handler) RESETSTATE', () => {
     it('Should reset the state', () => {
       let state = reducer({test: 1}, {})
@@ -163,6 +191,7 @@ describe('(Redux Module) Counter', () => {
       const theList = [testDev, furtherDev]
       state = reducer(state, redux.addToDevList(theList.concat(testDev)))
       expect(state.developers).to.eql(theList)
+      expect(state.pages).to.eql(1)
     })
   })
 
