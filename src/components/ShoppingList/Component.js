@@ -184,7 +184,7 @@ export const ShoppingList = (props) => (
       </div>
     </div>
 
-    <div id="confirmModal" className="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div id="confirmModal" className="modal fade text-center" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div className="modal-dialog">
         <div className="modal-content">
 
@@ -216,10 +216,21 @@ export const ShoppingList = (props) => (
           </div>
           <div className="modal-footer">
 
-            <button type="button" className="btn btn-default" data-dismiss="modal" onClick={props.endOrdering}>Close</button>
+            <button type="button" className="btn btn-default" data-dismiss="modal" style={{
+                display: props.token ? 'none' : 'inline',
+              }}>Close</button>
             <button type="button" style={{
-                display: props.token ? 'none' : 'inherit',
-              }} onClick={() => props.sendOrder(dv('#user-email'))} className="btn btn-primary">Send order</button>
+                display: props.token ? 'none' : 'inline',
+              }} onClick={() => props.sendOrder(dv('#user-email'))} className="btn btn-success">Send order</button>
+
+            <button className="btn btn-primary" data-dismiss="modal"
+              style={{
+                  display: props.token ? 'inline' : 'none',
+                }}
+              onClick={props.endOrdering}
+            >
+            Reset the view
+            </button>
 
           </div>
         </div>
