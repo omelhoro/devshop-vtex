@@ -2,7 +2,7 @@ import {errorHandler} from '../lib/utils';
 const BP = require('bluebird');
 const levelup = require('levelup')
 const uuid = require('node-uuid');
-const db = levelup('./db');
+const db = levelup(process.env.DB_PATH || './db');
 import {sendToken} from '../lib/emailService';
 
 async function processOrderAsync(req, res) {
