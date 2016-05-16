@@ -259,7 +259,13 @@ const ACTION_HANDLERS = {
     };
   },
   [USECOUPON]: (state, action) => {
-    return {...state, coupon: action.value, discount: action.discount};
+    const preState =
+    {...state, coupon: action.value,
+      discount: action.discount};
+    return {
+      ...preState,
+      ...calculateSum(preState),
+    }
   },
   [RESETSTATE]: (state, action) => {
     return {...state, ...shoppinglist};
@@ -298,7 +304,6 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = shoppinglist;
-console.log('local initial state', initialState);
 export default function counterReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
