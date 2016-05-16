@@ -2,8 +2,8 @@
 exports.config = {
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  capatibilities: {
-    browserName: 'chrome',
+  capabilities: {
+    browserName: process.env.TEST_BROWSER || 'chrome',
     chromeOptions: {
       args: [
         '--window-workspace=3',
