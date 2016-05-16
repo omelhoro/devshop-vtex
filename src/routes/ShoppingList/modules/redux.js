@@ -13,6 +13,7 @@ const SETTOKEN = 'SETTOKEN';
 const SETSTATE = 'SETSTATE';
 export const RESETSTATE = 'RESETSTATE';
 export const CHANGEPAGE = 'CHANGEPAGE';
+export const LOADINGSTATE = 'LOADINGSTATE';
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -47,16 +48,26 @@ export function calculatePrice(obj, e) {
   };
 }
 
+export function setLoadingState(loading) {
+  return {
+    type: LOADINGSTATE,
+    loading,
+  };
+}
+
 export function addDevFromName(dev) {
   return async (dispatch) => {
     if (!dev) {
       alert('No input');
       return;
     }
+
+    dispatch(setLoadingState(true));
     const out = await fetch(`/getdev?dev=${dev}`);
     const outJson = await out.json();
+    dispatch(setLoadingState(false));
     dispatch(addToDevList(outJson));
-  }
+  };
 }
 
 export function setToken(token) {
@@ -116,8 +127,10 @@ export function addDevFromOrg(org) {
       alert('No input');
       return;
     }
+    dispatch(setLoadingState(true));
     const out = await fetch(`/getmembers?org=${org}`);
     const outJson = await out.json();
+    dispatch(setLoadingState(false));
     dispatch(addToDevList(outJson));
   };
 }
@@ -182,6 +195,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
+  [LOADINGSTATE]: (state, action) => ({...state, loading: action.loading}),
   [ADDTOCARD]: (state, action) => {
     const ixAdd = _.findIndex(state.shoppingcard, e => e.login === action.item.login);
     const ixIsInCard = _.findIndex(state.developers, e => e.login === action.item.login);
@@ -258,9 +272,9 @@ const ACTION_HANDLERS = {
     return {
       ...preState,
       ...calculateSum(preState),
-    }
+    };
   },
-  [RESETSTATE]: (state, action) => {
+  [RESETSTATE]: () => {
     return {...shoppinglist};
   },
   [SETDEVLIST]: (state, action) => {
@@ -290,7 +304,7 @@ const ACTION_HANDLERS = {
     return {
       ...preState,
       ...calculateSum(preState),
-    }
+    };
   },
 };
 
