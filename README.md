@@ -22,10 +22,8 @@ We have now the basic functionalities of shop. So we're adding some features whi
   * After buying it's nice to view the developers not only with the price but also with parameters they were bought with
 * Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código "SHIPIT".
   * That is not strictly required in a shop, so I've implemented it as last
-
-
 * Criar paginação para a lista de desenvolvedores.
-  * Not implemented
+  * That was the last implemented feature since I'm not a big fan of paginations, but more of infinite scrolling
 
 ## Server side
 
