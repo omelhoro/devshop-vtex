@@ -3,7 +3,7 @@ import DuckImage from '../assets/Duck.jpg'
 import classes from './HomeView.scss'
 
 export const HomeView = () => (
-  <div id="" preview debounce={150}><h2><a id="Objetivo_0" />Objetivo</h2>
+  <div id="" preview debounce={150}><h2 id="first-h2"><a id="Objetivo_0" />Objetivo</h2>
     <p>Criar o carrinho de compras de uma loja que vende desenvolvedores baseado no exemplo fornecido.</p>
     <p><img src="http://i.imgur.com/8NPz67T.png" alt="Imgur" /></p>
     <p>Queremos descobrir seu nível de habilidade em todas as áreas envolvidas na construção de um aplicativo web: <em>back end</em>, <em>front end</em> e usabilidade.</p>
@@ -13,12 +13,12 @@ export const HomeView = () => (
     <ul>
       <li>Determinar o preço do desenvolvedor a partir de informações do seu perfil do GitHub, como por exemplo: followers, repos, stars, commits, etc.</li>
       <li>Substituir os inputs de texto por uma lista de desenvolvedores com nome, foto, preço e um botão de “Adicionar ao carrinho”.</li>
-      <li>Criar paginação para a lista de desenvolvedores.</li>
       <li>Popular a lista de desenvolvedores a partir de uma organização do GitHub.</li>
       <li>Permitir a escolha de quantidade de horas contratadas de cada desenvolvedor.</li>
       <li>Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código “SHIPIT”.</li>
-      <li>Melhorar a visualização do desenvolvedor no carrinho mostrando mais informações.</li>
       <li>Adicionar um botão de “comprar” que leva o usuário a uma página de pedido confirmado.</li>
+      <li>Melhorar a visualização do desenvolvedor no carrinho mostrando mais informações.</li>
+      <li>Criar paginação para a lista de desenvolvedores.</li>
     </ul>
     <h2><a id="Server_side_23" />Server side</h2>
     <p>Crie uma API REST simples que, no mínimo, utiliza uma lista em memória para guardar o estado do carrinho.</p>
