@@ -1,5 +1,3 @@
-/* eslint no-console: 0 */
-
 const path = require('path');
 const express = require('express');
 const config = require('../build/webpack.config').default;
@@ -14,10 +12,10 @@ const app = express();
 
 app.use(bodyParser.json())
 
-app.get('/getmembers', getMembersOfOrg);
-app.get('/getdev', getDeveloper);
-app.post('/postorder', processOrder);
-app.get('/getorder', getOrder);
+app.get(  '/getmembers',   getMembersOfOrg);
+app.get(  '/getdev',       getDeveloper);
+app.post( '/postorder',    processOrder);
+app.get(  '/getorder',     getOrder);
 
 if (isDeveloping) {
   const webpack = require('webpack');
