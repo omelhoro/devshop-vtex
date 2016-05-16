@@ -1,8 +1,18 @@
 build:
-  image: node
+  image: node:6
   commands:
     - npm i
-    - npm test
+    # - npm i -g protractor
+    # - apt-get update
+    # - apt-get install -y default-jre
+    # - webdriver-manager update
+    # - webdriver-manager start &
+    # - npm run test-ui
+    - npm rebuild leveldown
+    - npm rebuild levelup
+    - npm run test-unitserver
+    - DB_PATH=/tmp/db npm run test-integration
+    - npm run test-unitclient
 deploy:
   rsync:
     user: $$PROD_USER
