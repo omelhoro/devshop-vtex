@@ -3,7 +3,7 @@ import classes from './Component.scss';
 import * as _ from 'lodash';
 
 const listElement = (ctx, i) => (
-  <div key={`developer-entry-${i}`} className="well developer-entry" id={`${ctx.e.login}-data`}>
+  <div key={`developer-entry-${ctx.e.login}`} className="well developer-entry" id={`${ctx.e.login}-data`}>
     <div className="media">
       <div className="media-left media-top">
         <a href="#">
@@ -67,7 +67,7 @@ const listElement = (ctx, i) => (
             .addToCard
             .bind(null, ctx.e)}
            >
-            Add {ctx.e.login} to card for {ctx.e.appAdded.totalSum}$
+            Add {ctx.e.login} to cart for {ctx.e.appAdded.totalSum}$
           </button>
           <button
             className="btn btn-block btn-warning" style={{
@@ -85,7 +85,7 @@ const listElement = (ctx, i) => (
 );
 
 const listShoppingCard = (ctx, i) => (
-  <li key={`shoppingcart-${i}`} className="list-group-item">
+  <li key={`shoppingcart-${ctx.e.login}`} className="list-group-item">
     {ctx.e.login}
     {' '}
     ({ctx.e.appAdded.orderedHours * ctx.e.appAdded.price}$)
