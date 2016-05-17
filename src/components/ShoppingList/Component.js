@@ -5,9 +5,10 @@ import * as _ from 'lodash';
 const listElement = (ctx) => (
   <div className="well developer-entry" id={`${ctx.e.login}-data`}>
     <div className="media">
-      <div className="media-left media-middle">
+      <div className="media-left media-top">
         <a href="#">
           <img
+            className={classes.devPhoto}
             src={ctx.e.avatar_url} alt={ctx.e.login} style={{
               maxWidth: 100,
             }}
@@ -64,17 +65,18 @@ const listElement = (ctx) => (
                 : 'inherit'
             }} className="btn btn-block btn-success add-to-card" onClick={ctx
             .addToCard
-            .bind(null, ctx.e)}>
+            .bind(null, ctx.e)}
+           >
             Add {ctx.e.login} to card for {ctx.e.appAdded.totalSum}$
           </button>
           <button
             className="btn btn-block btn-warning" style={{
               display: ctx.e.isInCard
                 ? 'inherit'
-                : 'none'
+                : 'none',
             }} onClick={ctx
             .removeFromCard
-            .bind(null, ctx.e)}>Remove from card
+            .bind(null, ctx.e)}>Remove from cart
           </button>
         </div>
       </div>
@@ -226,43 +228,55 @@ export const ShoppingList = (props) => (
         <div
           className="fixed" style={{
             position: 'fixed',
+            width: 290,
             margin: '10px',
           }}
         >
-          <ul className="list-group">
-            {props
-              .shoppingcard
-              .map(e => listShoppingCard({
-                e,
-                ...props,
-              }))}
-          </ul>
 
-          <div
-            style={{
-              display: props.shoppingcard.length
-              ? 'inherit'
-              : 'none',
-            }}
-          >
-            <div className="input-group">
-              <span className="input-group-addon">Coupon</span>
-              <input
-                id="coupon-entry"
-                placeholder="SHIPIT" value={props.coupon}
-                onChange={props.useCoupon} className="form-control" type="text"
-              />
-            </div>
-
-            {priceFormatWithDiscount(props)}
-
-            <button
-              id="open-modal-confirm"
-              data-toggle="modal" data-target="#confirmModal" className="btn btn-block btn-info"
-            >
-              Order
-            </button>
+        <div
+          className="panel panel-default"
+          style={{
+            display: props.shoppingcard.length
+            ? 'inherit'
+            : 'none',
+          }}
+        >
+          <div className="panel-heading">
+            <h3 className="panel-title">Shopping cart</h3>
           </div>
+          <div className="panel-body">
+            <ul className="list-group">
+              {props
+                .shoppingcard
+                .map(e => listShoppingCard({
+                  e,
+                  ...props,
+                }))}
+            </ul>
+
+            <div>
+              <div className="input-group">
+                <span className="input-group-addon">Coupon</span>
+                <input
+                  id="coupon-entry"
+                  placeholder="SHIPIT" value={props.coupon}
+                  onChange={props.useCoupon} className="form-control" type="text"
+                />
+              </div>
+
+              {priceFormatWithDiscount(props)}
+
+              <button
+                id="open-modal-confirm"
+                data-toggle="modal" data-target="#confirmModal" className="btn btn-block btn-info"
+              >
+                Order
+              </button>
+            </div>
+          </div>
+        </div>
+
+
         </div>
       </div>
     </div>
