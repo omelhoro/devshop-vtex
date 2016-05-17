@@ -5,6 +5,8 @@ export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     // Add sync reducers here
     router,
+    shoppinglist: () => 1,
+    shoppingcard: () => 1,
     ...asyncReducers,
   })
 }
