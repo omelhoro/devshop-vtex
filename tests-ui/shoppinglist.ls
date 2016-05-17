@@ -25,3 +25,12 @@ describe 'On the shopping list', ->
 
     totalSum <- $ '#total-sum' .getText! .then!
     expect parseInt(totalSum) .toBeLessThan wishedSum
+
+  its 'user should type in something wrong and get an alert', ->
+    <- utils.typeDev 'omexcvcxvxcvcxvlhoro'
+    browser.wait(protractor.ExpectedConditions.alertIsPresent!, 5000)
+    browser.switchTo!.alert!.accept!
+
+    <- utils.typeOrg 'xcvxcvxvwerw'
+    browser.wait(protractor.ExpectedConditions.alertIsPresent!, 5000)
+    browser.switchTo!.alert!.accept!
