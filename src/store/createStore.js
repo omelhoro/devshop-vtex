@@ -13,7 +13,6 @@ import initState from './initState';
 const initialStateDefault = {
   ...initState,
 };
-console.log('InitState', initState, initialStateDefault);
 
 export default (initialState = initialStateDefault, history) => {
   // ======================================================
