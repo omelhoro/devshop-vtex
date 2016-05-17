@@ -48,7 +48,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = shoppingcard;
+export const initialState = shoppingcard;
 export default function counterReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
