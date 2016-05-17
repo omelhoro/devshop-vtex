@@ -18,7 +18,7 @@ export const Header = (props) => (
 );
 
 Header.defaultProps = {
-  developers: [],
+  shoppingcard: [],
 };
 
 const mapStateToProps = (state) => ({
