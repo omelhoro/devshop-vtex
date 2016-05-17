@@ -14,6 +14,7 @@ const SETSTATE = 'SETSTATE';
 export const RESETSTATE = 'RESETSTATE';
 export const CHANGEPAGE = 'CHANGEPAGE';
 export const LOADINGSTATE = 'LOADINGSTATE';
+export const SKIPCHANGE = 'SKIPCHANGE';
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -56,17 +57,28 @@ export function setLoadingState(loading) {
 }
 
 export function addDevFromName(dev) {
-  return async (dispatch) => {
-    if (!dev) {
-      alert('No input');
-      return;
-    }
+  if (!dev) {
+    alert('No input');
+    return {
+      type: SKIPCHANGE,
+    };
+  }
 
+  return async (dispatch) => {
     dispatch(setLoadingState(true));
     const out = await fetch(`/getdev?dev=${dev}`);
-    const outJson = await out.json();
     dispatch(setLoadingState(false));
-    dispatch(addToDevList(outJson));
+    switch (out.status) {
+      case 200:
+        const outJson = await out.json();
+        dispatch(addToDevList(outJson));
+        break;
+      case 404:
+        alert(`No such developer: ${dev}`);
+        return;
+      default:
+        alert(`An error ocurred on the server: ${out.status}`);
+    }
   };
 }
 
@@ -122,16 +134,28 @@ export function sendOrder(email) {
 }
 
 export function addDevFromOrg(org) {
+  if (!org) {
+    alert('No input');
+    return {
+      type: SKIPCHANGE,
+    };
+  }
+
   return async (dispatch) => {
-    if (!org) {
-      alert('No input');
-      return;
-    }
     dispatch(setLoadingState(true));
     const out = await fetch(`/getmembers?org=${org}`);
-    const outJson = await out.json();
     dispatch(setLoadingState(false));
-    dispatch(addToDevList(outJson));
+    switch (out.status) {
+      case 200:
+        const outJson = await out.json();
+        dispatch(addToDevList(outJson));
+        break;
+      case 404:
+        alert(`No such organisation: ${org}`);
+        return;
+      default:
+        alert(`An error ocurred on the server: ${out.status}`);
+    }
   };
 }
 
@@ -264,6 +288,9 @@ const ACTION_HANDLERS = {
       ...state,
       ...action.state,
     };
+  },
+  [SKIPCHANGE]: (state) => {
+    return state;
   },
   [USECOUPON]: (state, action) => {
     const preState =
