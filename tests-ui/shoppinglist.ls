@@ -14,7 +14,7 @@ describe 'On the shopping list', ->
   its 'user should type in an organization', ->
     <- utils.typeOrg 'Homebrew'
     count <- $$ '#developers-list .well' .count!.then!
-    expect count .toEqual 21
+    expect count .toEqual 5
 
   its 'user should choose developers for the card and coupon is working', ->
 
