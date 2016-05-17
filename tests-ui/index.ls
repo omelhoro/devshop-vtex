@@ -22,5 +22,4 @@ describe 'Index page', ->
     text <- (items.map (.getText!)
       |> Promise.all).then!
 
-    console.log(items, text)
     expect text .toEqual headers
