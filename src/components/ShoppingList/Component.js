@@ -226,15 +226,7 @@ export const ShoppingList = (props) => (
 
       <div className="col-sm-4">
         <div
-          className="fixed" style={{
-            position: 'fixed',
-            width: 290,
-            margin: '10px',
-          }}
-        >
-
-        <div
-          className="panel panel-default"
+          className={`panel panel-default ${classes.shoppingcard}`}
           style={{
             display: props.shoppingcard.length
             ? 'inherit'
@@ -274,7 +266,6 @@ export const ShoppingList = (props) => (
               </button>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
