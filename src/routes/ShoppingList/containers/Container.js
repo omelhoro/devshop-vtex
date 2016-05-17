@@ -7,7 +7,7 @@ import {actions} from '../modules/redux'
     wiring in the actions and state necessary to render a presentational
     component - in this case, the counter:   */
 
-import Counter from 'components/ShoppingList'
+import ShoppingList from 'components/ShoppingList'
 
 /*  Object of action creators (can also be function that returns object).
     Keys will be passed as props to presentational components. Here we are
@@ -18,7 +18,7 @@ const mapActionCreators = {
 };
 
 const mapStateToProps = (state) => ({
-    ...state.shoppinglist,
+  ...state.shoppinglist,
 });
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => ({
     Selectors are composable. They can be used as input to other selectors.
     https://github.com/reactjs/reselect    */
 
-export default connect(mapStateToProps, mapActionCreators)(Counter)
+export default connect(mapStateToProps, mapActionCreators)(ShoppingList)
