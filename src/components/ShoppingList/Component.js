@@ -59,22 +59,14 @@ const listElement = (ctx, i) => (
 
         <div className="">
           <button
-            disabled={!ctx.e.appAdded.orderedHours} style={{
-              display: ctx.e.isInCard
-                ? 'none'
-                : 'inherit'
-            }} className="btn btn-block btn-success add-to-card" onClick={ctx
+            disabled={!ctx.e.appAdded.orderedHours} hidden={ctx.e.isInCard} className="btn btn-block btn-success add-to-card" onClick={ctx
             .addToCard
             .bind(null, ctx.e)}
            >
             Add {ctx.e.login} to cart for {ctx.e.appAdded.totalSum}$
           </button>
           <button
-            className="btn btn-block btn-warning" style={{
-              display: ctx.e.isInCard
-                ? 'inherit'
-                : 'none',
-            }} onClick={ctx
+            className="btn btn-block btn-warning" hidden={!ctx.e.isInCard} onClick={ctx
             .removeFromCard
             .bind(null, ctx.e)}>Remove from cart
           </button>
@@ -148,13 +140,6 @@ const redirect = (token) => {
 
 export const ShoppingList = (props) => (
   <div>
-    <h5 className={classes.counterContainer}>
-      Devs in Shopping Card: {' '}
-      <span className={classes['counter--green']}>
-        {props.shoppingcard.length}
-      </span>
-    </h5>
-
     <div
       className="row" style={{
         marginBottom: 10,
@@ -226,12 +211,8 @@ export const ShoppingList = (props) => (
 
       <div className="col-sm-4">
         <div
-          className={`panel panel-default ${classes.shoppingcard}`}
-          style={{
-            display: props.shoppingcard.length
-            ? 'inherit'
-            : 'none',
-          }}
+          className={`panel panel-primary ${classes.shoppingcard}`}
+          hidden={!props.shoppingcard.length}
         >
           <div className="panel-heading">
             <h3 className="panel-title">Shopping cart</h3>
