@@ -2,8 +2,6 @@ require! './utils'
 its = it
 
 describe 'On the shopping list', ->
-  browser.ignoreSynchronization = true;
-
   beforeEach -> browser.get 'http://localhost:3000/shoppinglist'
 
   its 'user should type in a github user', ->
