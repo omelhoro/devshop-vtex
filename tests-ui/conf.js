@@ -10,5 +10,8 @@ exports.config = {
       ],
     },
   },
+  onPrepare: function() {
+    browser.ignoreSynchronization = true;
+  },
   specs: ['*.ls'],
 };
