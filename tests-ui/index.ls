@@ -1,7 +1,6 @@
 its = it
 
 describe 'Index page', ->
-  browser.ignoreSynchronization = true;
 
   beforeEach -> browser.get 'http://localhost:3000'
 
