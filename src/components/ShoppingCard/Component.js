@@ -19,7 +19,7 @@ function getParameterByName(name, url) {
 const listElement = (ctx, e) => (
   <div className="well developer-entry">
     <div className="media">
-      <div className="media-left media-middle">
+      <div className="media-left media-top">
         <a href="#">
           <img src={e.avatar_url} alt={e.login} style={{
             maxWidth: 100
