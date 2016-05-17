@@ -2,8 +2,8 @@ import React from 'react';
 import classes from './Component.scss';
 import * as _ from 'lodash';
 
-const listElement = (ctx) => (
-  <div className="well developer-entry" id={`${ctx.e.login}-data`}>
+const listElement = (ctx, i) => (
+  <div key={`developer-entry-${i}`} className="well developer-entry" id={`${ctx.e.login}-data`}>
     <div className="media">
       <div className="media-left media-top">
         <a href="#">
@@ -84,8 +84,8 @@ const listElement = (ctx) => (
   </div>
 );
 
-const listShoppingCard = (ctx) => (
-  <li className="list-group-item">
+const listShoppingCard = (ctx, i) => (
+  <li key={`shoppingcart-${i}`} className="list-group-item">
     {ctx.e.login}
     {' '}
     ({ctx.e.appAdded.orderedHours * ctx.e.appAdded.price}$)
@@ -115,7 +115,7 @@ const priceFormatWithDiscount = ({sumOriginal, discount, sum}) => (
 );
 
 const renderPageLink = (ctx, i) => (
-  <li onClick={ctx.changePage.bind(null, i)}
+  <li key={`page-${i}`} onClick={ctx.changePage.bind(null, i)}
     className={i === ctx.currentPage ? 'active' : ''}><a href="#">{i + 1}</a></li>
 );
 
@@ -275,8 +275,6 @@ export const ShoppingList = (props) => (
             </div>
           </div>
         </div>
-
-
         </div>
       </div>
     </div>
