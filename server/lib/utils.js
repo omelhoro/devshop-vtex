@@ -1,6 +1,6 @@
 export function errorHandler(err) {
-  console.error(err);
-  this.status = 500;
+  console.error('APIERROR', new Date().toJSON(), err);
+  this.status(err.code || 500);
   this.send();
 }
 
