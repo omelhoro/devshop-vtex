@@ -14,3 +14,15 @@
 .devPhoto {
   box-shadow:  4px 3px 3px black;
 }
+
+.shoppingcard {
+
+}
+
+@media (min-width: 770px) {
+  .shoppingcard {
+    position: fixed;
+    width: 290;
+    margin-right: 10px;
+  }
+}
