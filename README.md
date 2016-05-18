@@ -8,12 +8,13 @@ https://devshop-vtex.igor-fischer.rocks
 
 How to start locally with live reload?
 
+    # tested with Node 6.1
     npm i
     npm run dev
 
 And then go to http://localhost:3000
 
-Tested on the lastest Chrome and Firefox.
+Tested on the latest Chrome, Firefox and Edge browsers.
 
 ## Tarefas e priorização
 
@@ -33,7 +34,7 @@ We have now the basic functionalities of shop. So we're adding some features whi
 * Melhorar a visualização do desenvolvedor no carrinho mostrando mais informações.
   * After buying it's nice to view the developers not only with the price but also with parameters they were bought with
 * Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código "SHIPIT".
-  * That is not strictly required in a shop, so I've implemented it as last
+  * That is not strictly required for a shop in general, so I've implemented it as one of the last tasks
 * Criar paginação para a lista de desenvolvedores.
   * That was the last implemented feature since I'm not a big fan of paginations, but more of infinite scrolling
 
@@ -59,8 +60,7 @@ We have now the basic functionalities of shop. So we're adding some features whi
 
 ## Client side
 
-* ReactJS
-* Redux
+* ReactJS & Redux
 * Webpack
 * SASS
 * Bootstrap
@@ -83,6 +83,12 @@ We have now the basic functionalities of shop. So we're adding some features whi
 
     npm run test-unitclient
 
+
+### Code-Style Test
+
+*Only code which satisfies the linter will be pushed online*. So run this command before you're pushing to the repo.
+
+    npm run lint
 
 ## Deployment with Docker
 

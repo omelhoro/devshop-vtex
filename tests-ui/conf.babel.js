@@ -1,4 +1,5 @@
 // conf.js
+
 exports.config = {
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -10,8 +11,8 @@ exports.config = {
       ],
     },
   },
-  onPrepare: function() {
-    browser.ignoreSynchronization = true;
+  onPrepare() {
+    browser.ignoreSynchronization = true; // eslint-disable-line no-undef
   },
   specs: ['*.ls'],
 };

@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
 import {shoppinglist} from '../../../store/initState';
 
+/* eslint-disable no-alert */
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -69,10 +71,11 @@ export function addDevFromName(dev) {
     const out = await fetch(`/getdev?dev=${dev}`);
     dispatch(setLoadingState(false));
     switch (out.status) {
-      case 200:
+      case 200: {
         const outJson = await out.json();
         dispatch(addToDevList(outJson));
         break;
+      }
       case 404:
         alert(`No such developer: ${dev}`);
         return;
@@ -146,10 +149,11 @@ export function addDevFromOrg(org) {
     const out = await fetch(`/getmembers?org=${org}`);
     dispatch(setLoadingState(false));
     switch (out.status) {
-      case 200:
+      case 200: {
         const outJson = await out.json();
         dispatch(addToDevList(outJson));
         break;
+      }
       case 404:
         alert(`No such organisation: ${org}`);
         return;

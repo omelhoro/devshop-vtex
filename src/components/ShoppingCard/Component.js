@@ -92,6 +92,8 @@ export const ShoppingCard = (props) => (
 ShoppingCard.propTypes = {
   shoppingcard: React.PropTypes.array.isRequired,
   loadState: React.PropTypes.func.isRequired,
+  timestamp: React.PropTypes.string.isRequired,
+  sum: React.PropTypes.number.isRequired,
 };
 
 export default ShoppingCard;
