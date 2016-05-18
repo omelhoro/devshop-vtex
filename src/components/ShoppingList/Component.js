@@ -99,8 +99,8 @@ const dv = e => document
   .value;
 
 const loadingBar = () => (
-  <div className="row">
-    <div className="col-sm-8">
+  <div className={`row ${classes.importRow}`}>
+    <div className={`col-sm-8 ${classes.centerCol}`}>
       <div className="progress">
         <div className="progress-bar progress-bar-striped active"
           role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -167,11 +167,9 @@ const redirect = (token) => {
 export const ShoppingList = (props) => (
   <div>
     <div
-      className="row" style={{
-        marginBottom: 10,
-      }}
+      className={`row ${classes.importRow}`}
     >
-      <div className="col-sm-8">
+      <div className={`col-sm-8 ${classes.centerCol}`}>
         <div className="input-group">
           <span
             className="input-group-addon" style={{
@@ -194,11 +192,10 @@ export const ShoppingList = (props) => (
     </div>
 
     <div
-      className="row" style={{
-        marginBottom: 10,
-      }}
+      className={`row ${classes.importRow}`}
+
     >
-      <div className="col-sm-8">
+      <div className={`col-sm-8 ${classes.centerCol}`}>
         <div className="input-group">
           <span
             className="input-group-addon" style={{
