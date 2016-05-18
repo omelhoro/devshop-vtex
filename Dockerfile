@@ -5,7 +5,7 @@ ENV NODE_ENV production
 WORKDIR /app
 
 COPY ./package.json /app
-RUN npm install
+RUN npm install --quiet
 
 COPY ./ /app
 RUN npm run deploy:prod
