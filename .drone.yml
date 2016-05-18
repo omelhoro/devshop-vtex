@@ -21,6 +21,7 @@ build:
     - npm run test-unitserver
     - DB_PATH=/tmp/db npm run test-integration
     - npm run test-unitclient
+    - npm run lint
 deploy:
   rsync:
     user: $$PROD_USER
