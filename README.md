@@ -8,6 +8,12 @@ https://devshop-vtex.igor-fischer.rocks
 
 How to start locally with live reload?
 
+    # decrypt credentials
+    # you'll need gpg in your commandline which can be downloaded via brew on OSX (per default installed on most linux dists)
+    # brew install gpg
+    export VAULT_PASS="---what I've send you---"
+    ./vault/decrypt.sh
+
     # tested with Node 6.1
     npm i
     npm run dev
