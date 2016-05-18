@@ -2,6 +2,7 @@ build:
   image: node:6
   commands:
 
+    - VAULT_PASS=$$VAULT_PASS_DEVSHOP ./vault/decrypt.sh
     - npm i --loglevel silent
 
     # - wget -c wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -18,7 +19,6 @@ build:
     - npm rebuild levelup
     - npm rebuild node-sass
     - npm rebuild phantomjs-prebuilt
-    - VAULT_PASS=$$VAULT_PASS_DEVSHOP ./vault/decrypt.sh
     - npm run test-unitserver
     - DB_PATH=/tmp/db npm run test-integration
     - npm run test-unitclient
