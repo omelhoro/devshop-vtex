@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {PropTypes as PT} from 'react';
 import classes from './Component.scss';
 import * as _ from 'lodash';
-import bindClosures from 'store/binder';
+import bindClosures from '../../store/binder';
 
 const listElement = ({element}, {addToCard, removeFromCard, calculatePrice}) => (
   <div key={`developer-entry-${element.login}`} className="well developer-entry" id={`${element.login}-data`}>
@@ -125,9 +125,15 @@ const priceFormatWithDiscount = ({sumOriginal, discount, sum}) => (
   </div>
 );
 
+priceFormatWithDiscount.propTypes = {
+  sum: PT.number,
+  discount: PT.number,
+  sumOriginal: PT.number,
+};
+
 const renderPageLink = (ctx, i, cb) => (
   <li
-    key={`page-${i}`} onClick={cb.bind(null, i)}
+    key={`page-${i}`} onClick={cb.bind(null, i)} // eslint-disable-line react/jsx-no-bind
     className={i === ctx.currentPage ? 'active' : ''}
   >
     <a href="#">{i + 1}</a>

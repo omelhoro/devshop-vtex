@@ -8,6 +8,7 @@ https://devshop-vtex.igor-fischer.rocks
 
 How to start locally with live reload?
 
+    # tested with Node 6.1
     npm i
     npm run dev
 
@@ -82,6 +83,12 @@ We have now the basic functionalities of shop. So we're adding some features whi
 
     npm run test-unitclient
 
+
+### Code-Style Test
+
+*Only code which satisfies the linter will be pushed online*. So run this command before you're pushing to the repo.
+
+    npm run lint
 
 ## Deployment with Docker
 

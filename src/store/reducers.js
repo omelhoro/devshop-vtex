@@ -20,7 +20,7 @@ export const injectReducer = (store, {
   key,
   reducer,
 }) => {
-  store.asyncReducers[key] = reducer;
+  store.asyncReducers[key] = reducer; // eslint-disable-line no-param-reassign
   store.replaceReducer(makeRootReducer(store.asyncReducers));
 };
 

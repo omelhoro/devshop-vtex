@@ -10,14 +10,15 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 
 const app = express();
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-app.get(  '/getmembers',   getMembersOfOrg);
-app.get(  '/getdev',       getDeveloper);
-app.post( '/postorder',    processOrder);
-app.get(  '/getorder',     getOrder);
+app.get('/getmembers', getMembersOfOrg);
+app.get('/getdev', getDeveloper);
+app.post('/postorder', processOrder);
+app.get('/getorder', getOrder);
 
 if (isDeveloping) {
+  /* eslint-disable global-require */
   const webpack = require('webpack');
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
