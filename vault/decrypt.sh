@@ -7,8 +7,9 @@ if [ -z "$VAULT_PASS" ];
 fi
 
 gpg --passphrase "$VAULT_PASS" --batch --yes vault/secret.tar.gpg
-if [ $? -ne 0 ]; then
+if [ "$?" -ne 0 ]; then
 	echo "Something went wrong with decryption"
+	exit 1
 fi
 
 tar -zxvf vault/secret.tar

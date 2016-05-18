@@ -8,9 +8,9 @@ fi;
 
 tar -zcvf vault/secret.tar ./vault/secret
 gpg --symmetric --passphrase "$VAULT_PASS" vault/secret.tar
-
-if [ $? -ne 0 ]; then
+if [ "$?" -ne 0 ]; then
 	echo "Something went wrong with encryption"
+	exit 1
 fi
 
 rm ./vault/secret.tar
