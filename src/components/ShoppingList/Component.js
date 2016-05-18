@@ -246,6 +246,7 @@ export const ShoppingList = (props) => (
       <div className="col-sm-4">
         <div
           className={`panel panel-primary ${classes.shoppingcard}`}
+          hidden={!props.developers.length}
         >
           <div className="panel-heading">
             <h3 className="panel-title">Shopping cart</h3>
