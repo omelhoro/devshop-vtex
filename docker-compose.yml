@@ -10,6 +10,7 @@ services:
     environment:
       - VIRTUAL_HOST=devshop-vtex.igor-fischer.rocks
       - LETSENCRYPT_HOST=devshop-vtex.igor-fischer.rocks
+      - VAULT_PASS=${VAULT_PASS_DEVSHOP}
       - VIRTUAL_NETWORK=proxy-tier
       - VIRTUAL_PORT=3000
       - LETSENCRYPT_EMAIL=fischerig@outlook.com

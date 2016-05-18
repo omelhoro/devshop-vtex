@@ -61,7 +61,7 @@
       }
     },
     "start": {
-      "command": "babel-node bin/server",
+      "command": "./vault/decrypt.sh && babel-node bin/server",
       "env": {
         "DEBUG": "app:*"
       }

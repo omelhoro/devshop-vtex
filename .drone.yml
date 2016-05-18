@@ -2,7 +2,7 @@ build:
   image: node:6
   commands:
 
-    - npm i
+    - npm i --loglevel silent
 
     # - wget -c wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     # - dpkg -i google-chrome-*.deb
@@ -19,6 +19,7 @@ build:
     - npm rebuild node-sass
     - npm rebuild phantomjs-prebuilt
     - npm run test-unitserver
+    - VAULT_PASS="$$VAULT_PASS_DEVSHOP" ./vault/decrypt.sh
     - DB_PATH=/tmp/db npm run test-integration
     - npm run test-unitclient
     - npm run lint
@@ -32,7 +33,7 @@ deploy:
     delete: false
     commands:
       - docker-compose -f /tmp/$$COMMIT/docker-compose.yml pull
-      - docker-compose -f /tmp/$$COMMIT/docker-compose.yml -p devshop-vtex up -d
+      - VAULT_PASS_DEVSHOP=$$VAULT_PASS_DEVSHOP docker-compose -f /tmp/$$COMMIT/docker-compose.yml -p devshop-vtex up -d
     when:
       branch: master
 
