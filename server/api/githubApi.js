@@ -17,9 +17,8 @@ const github = new GitHubApi({
 });
 
 github.authenticate({
-  type: 'basic',
-  username: githubCreds.username,
-  password: githubCreds.password,
+  type: 'oauth',
+  token: githubCreds.token,
 });
 
 async function getSingleUser(user) {
