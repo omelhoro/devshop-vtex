@@ -1,0 +1,14 @@
+{
+  "ignore": [
+    "*min.js",
+    "tasks/*",
+    "build/*"
+  ],
+  "test": [
+  ],
+  "dependencies": {
+    "unused-ignores": [
+      "*"
+    ]
+  }
+}

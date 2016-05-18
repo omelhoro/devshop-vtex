@@ -20,9 +20,10 @@ describe 'Utils in backend', ->
 
   its 'should handle errors by sending 500 back and log the issue', (done) ->
     res =
-      status: 200
+      _status: 200
+      status: (code) -> code ? res._status = code : res._status
       send: (data) ->
-        assert res.status, 500
+        assert res.status(), 500
         done!
 
     utils.errorHandler.bind(res) 'Something gone wrong'
