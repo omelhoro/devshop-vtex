@@ -11,7 +11,7 @@ How to start locally with live reload?
     # decrypt credentials
     # you'll need gpg in your command line which can be downloaded via brew on OSX (per default installed on most linux dists)
     # brew install gpg
-    export VAULT_PASS='---what I've sent you---'
+    export VAULT_PASS="---what I've sent you---"
     ./vault/decrypt.sh
 
     # tested with Node 6.1
