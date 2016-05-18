@@ -6,6 +6,11 @@
   font-size: 23px;
 }
 
+.headerLink:focus {
+  font-size: 23px;
+  text-decoration: none;
+}
+
 .shoppingcardCounter {
   color: lightgreen;
 }
