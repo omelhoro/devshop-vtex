@@ -4,11 +4,14 @@ import {
 import {
   routerReducer as router,
 } from 'react-router-redux';
+import initState from './initState';
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     // Add sync reducers here
     router,
+    shoppinglist: () => initState.shoppinglist,
+    shoppingcard: () => initState.shoppingcard,
     ...asyncReducers,
   });
 };
