@@ -3,7 +3,7 @@ import classes from './Component.scss';
 import * as _ from 'lodash';
 import bindClosures from 'store/binder';
 
-const listElement = ({element, addToCard, removeFromCard, calculatePrice}) => (
+const listElement = ({element}, {addToCard, removeFromCard, calculatePrice}) => (
   <div key={`developer-entry-${element.login}`} className="well developer-entry" id={`${element.login}-data`}>
     <div className="media">
       <div className="media-left media-top">
@@ -74,6 +74,10 @@ const listElement = ({element, addToCard, removeFromCard, calculatePrice}) => (
   </div>
 );
 
+listElement.propTypes = {
+  element: React.PropTypes.object.isRequired,
+};
+
 // Inject a new `onComplete` that receives the original props.
 const ListElement = bindClosures({
   addToCard({props, element}) {
@@ -83,11 +87,11 @@ const ListElement = bindClosures({
     props.removeFromCard(element);
   },
   calculatePrice({props, element}, event) {
-    props.calculatePrice(element, event)
+    props.calculatePrice(element, event);
   },
 })(listElement);
 
-const listShoppingCard = (ctx, i) => (
+const listShoppingCard = (ctx) => (
   <li key={`shoppingcart-${ctx.e.login}`} className="list-group-item">
     {ctx.e.login}
     {' '}
@@ -103,9 +107,11 @@ const loadingBar = () => (
   <div className={`row ${classes.importRow}`}>
     <div className={`col-sm-8 ${classes.centerCol}`}>
       <div className="progress">
-        <div className="progress-bar progress-bar-striped active"
+        <div
+          className="progress-bar progress-bar-striped active"
           role="progressbar" aria-valuenow="100" aria-valuemin="0"
-          aria-valuemax="100" style={{width: '100%'}}>
+          aria-valuemax="100" style={{width: '100%'}}
+        >
         </div>
       </div>
     </div>
@@ -120,33 +126,41 @@ const priceFormatWithDiscount = ({sumOriginal, discount, sum}) => (
 );
 
 const renderPageLink = (ctx, i, cb) => (
-  <li key={`page-${i}`} onClick={cb.bind(null, i)}
-    className={i === ctx.currentPage ? 'active' : ''}><a href="#">{i + 1}</a>
+  <li
+    key={`page-${i}`} onClick={cb.bind(null, i)}
+    className={i === ctx.currentPage ? 'active' : ''}
+  >
+    <a href="#">{i + 1}</a>
   </li>
 );
 
-const paginationRaw = (ctx) => (
+const pagination = ({props}, closure) => (
   <ul
     className="pagination"
     style={{
-      display: ctx.props.pages > 1 ? 'table' : 'none',
+      display: props.pages > 1 ? 'table' : 'none',
       margin: '0 auto',
       marginBottom: 10,
     }}
   >
     <li>
-      <a href="#" aria-label="Previous" onClick={ctx.changePageBack}>
+      <a href="#" aria-label="Previous" onClick={closure.changePageBack}>
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    {_.range(ctx.props.pages).map(ctx.renderPageLink)}
+    {_.range(props.pages).map(closure.renderPageLink)}
     <li>
-      <a href="#" aria-label="Next" onClick={ctx.changePageForward}>
+      <a href="#" aria-label="Next" onClick={closure.changePageForward}>
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
   </ul>
 );
+
+pagination.propTypes = {
+  pages: React.PropTypes.number.isRequired,
+  props: React.PropTypes.object.isRequired,
+};
 
 // Inject a new `onComplete` that receives the original props.
 const Pagination = bindClosures({
@@ -159,7 +173,7 @@ const Pagination = bindClosures({
   changePageForward({props}) {
     props.changePage(props.currentPage + 1);
   },
-})(paginationRaw);
+})(pagination);
 
 const redirect = (token) => {
   location.href = `${location.origin}/shoppingcard?token=${token}`;
