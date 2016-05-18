@@ -1,4 +1,4 @@
-import {mailgun as mailgunCreds} from '../../vault/credentials';
+import {mailgun as mailgunCreds} from '../../vault/secret/credentials';
 
 const mailgun = require('mailgun-js')({apiKey: mailgunCreds.apiKey, domain: mailgunCreds.domain});
 
