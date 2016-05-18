@@ -185,7 +185,7 @@ const redirect = (token) => {
   location.href = `${location.origin}/shoppingcard?token=${token}`;
 };
 
-export const ShoppingList = (props) => (
+export const ShoppingList = (props, closures) => (
   <div>
     <div
       className={`row ${classes.importRow}`}
@@ -351,7 +351,7 @@ export const ShoppingList = (props) => (
               style={{
                 display: props.token ? 'inline' : 'none',
               }}
-              onClick={props.redirect}
+              onClick={closures.redirect}
             >
             Go to the order
             </button>
