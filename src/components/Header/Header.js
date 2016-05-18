@@ -34,7 +34,7 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => ({
   ...state.router,
-  shoppingcard: state.shoppinglist.shoppingcard,
+  shoppingcard: state.shoppinglist ? state.shoppinglist.shoppingcard : [],
 });
 
 export default connect(mapStateToProps, {})(Header);
