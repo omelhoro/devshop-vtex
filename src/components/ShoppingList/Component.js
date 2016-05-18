@@ -229,43 +229,40 @@ export const ShoppingList = (props) => (
           .map(e => <ListElement props={props} element={e} />)}
         <Pagination props={props} />
       </div>
-
       <div className="col-sm-4">
         <div
           className={`panel panel-primary ${classes.shoppingcard}`}
-          hidden={!props.shoppingcard.length}
         >
           <div className="panel-heading">
             <h3 className="panel-title">Shopping cart</h3>
           </div>
           <div className="panel-body">
-            <ul className="list-group">
-              {props
-                .shoppingcard
-                .map(e => listShoppingCard({
-                  e,
-                  ...props,
-                }))}
-            </ul>
-
-            <div>
-              <div className="input-group">
-                <span className="input-group-addon">Coupon</span>
-                <input
-                  id="coupon-entry"
-                  placeholder="SHIPIT" value={props.coupon}
-                  onChange={props.useCoupon} className="form-control" type="text"
-                />
+            <div hidden={!props.shoppingcard.length}>
+              <ul className="list-group">
+                {props
+                  .shoppingcard
+                  .map(e => listShoppingCard({
+                    e,
+                    ...props,
+                  }))}
+              </ul>
+              <div>
+                <div className="input-group">
+                  <span className="input-group-addon">Coupon</span>
+                  <input
+                    id="coupon-entry"
+                    placeholder="SHIPIT" value={props.coupon}
+                    onChange={props.useCoupon} className="form-control" type="text"
+                  />
+                </div>
+                {priceFormatWithDiscount(props)}
+                <button
+                  id="open-modal-confirm"
+                  data-toggle="modal" data-target="#confirmModal" className="btn btn-block btn-info"
+                >
+                  Order
+                </button>
               </div>
-
-              {priceFormatWithDiscount(props)}
-
-              <button
-                id="open-modal-confirm"
-                data-toggle="modal" data-target="#confirmModal" className="btn btn-block btn-info"
-              >
-                Order
-              </button>
             </div>
           </div>
         </div>
