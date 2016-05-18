@@ -1,7 +1,8 @@
 {
   "ignore": [
     "*min.js",
-    "tasks/*"
+    "tasks/*",
+    "build/*"
   ],
   "test": [
   ],
