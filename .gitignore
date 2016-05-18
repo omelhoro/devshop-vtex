@@ -7,3 +7,7 @@ dist
 coverage
 task
 db
+
+vault/secret
+vault/secret.tar
+.vagrant

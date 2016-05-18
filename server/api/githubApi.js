@@ -1,6 +1,6 @@
 const BP = require('bluebird');
 import {errorHandler, calculateHoursPrice} from '../lib/utils';
-import {github as githubCreds} from '../../vault/credentials';
+import {github as githubCreds} from '../../vault/secret/credentials';
 const GitHubApi = require('github');
 const github = new GitHubApi({
   // required
