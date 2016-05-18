@@ -1,7 +1,5 @@
 build:
   image: node:6
-  environment:
-    - VAULT_PASS="$$VAULT_PASS_DEVSHOP"
   commands:
 
     - npm i --loglevel silent
@@ -20,7 +18,7 @@ build:
     - npm rebuild levelup
     - npm rebuild node-sass
     - npm rebuild phantomjs-prebuilt
-    - ./vault/decrypt.sh
+    - VAULT_PASS="$$VAULT_PASS_DEVSHOP" ./vault/decrypt.sh
     - npm run test-unitserver
     - DB_PATH=/tmp/db npm run test-integration
     - npm run test-unitclient
