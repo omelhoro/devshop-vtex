@@ -12,18 +12,18 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
 /* eslint-enable */
-
 
 const listElement = (ctx, e) => (
   <div className="well developer-entry">
     <div className="media">
       <div className="media-left media-top">
         <a href="#">
-          <img src={e.avatar_url} alt={e.login} style={{
-            maxWidth: 100
-          }}/>
+          <img
+            src={e.avatar_url} alt={e.login} style={{
+              maxWidth: 100,
+            }}
+          />
         </a>
       </div>
       <div className="media-body">
