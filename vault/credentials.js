@@ -1,6 +1,5 @@
 export const github = {
-  username: 'eldjango',
-  password: 'Bjrzv%Ir%n89',
+  token: 'ab59b1434c09df8f9559c2d2098620e69b1ce643',
 };
 
 export const mailgun = {
