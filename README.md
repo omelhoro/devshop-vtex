@@ -1,11 +1,10 @@
 
 # The code challenge from VTEX
 
-[![Build Status](https://ci.igor-fischer.rocks/api/badges/omelhoro/devshop-vtex/status.svg)](https://ci.igor-fischer.rocks/omelhoro/devshop-vtex)
-
-[![bitHound Overall Score](https://www.bithound.io/projects/badges/05b79f00-1c9a-11e6-ade6-8fedb5cea676/score.svg)](https://www.bithound.io/github/omelhoro/devshop-vtex)
-
 https://devshop-vtex.igor-fischer.rocks
+
+[![Build Status](https://ci.igor-fischer.rocks/api/badges/omelhoro/devshop-vtex/status.svg)](https://ci.igor-fischer.rocks/omelhoro/devshop-vtex)
+[![bitHound Overall Score](https://www.bithound.io/projects/badges/05b79f00-1c9a-11e6-ade6-8fedb5cea676/score.svg)](https://www.bithound.io/github/omelhoro/devshop-vtex)
 
 How to start locally with live reload?
 
@@ -13,6 +12,8 @@ How to start locally with live reload?
     npm run dev
 
 And then go to http://localhost:3000
+
+Tested on the lastest Chrome and Firefox.
 
 ## Tarefas e priorização
 
