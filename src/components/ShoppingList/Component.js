@@ -226,6 +226,7 @@ export const ShoppingList = (props) => (
           .developers
           .slice(props.currentPage * props.devsOnPage, (props.currentPage + 1) * props.devsOnPage)
           .map(e => <ListElement props={props} element={e} />)}
+        <Pagination props={props} />
       </div>
 
       <div className="col-sm-4">
