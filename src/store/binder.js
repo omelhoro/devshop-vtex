@@ -1,8 +1,10 @@
 import React from 'react';
 
+/* eslint-disable no-param-reassign, no-underscore-dangle */
+
 export default function bindClosures(closuresMap) {
-  return (Component) => {
-    const componentName = Component.displayName || Component.name || 'Component';
+  return (component) => {
+    const componentName = component.displayName || component.name || 'Component';
     const closureNames = Object.keys(closuresMap);
     const spec = closureNames.reduce((memo, closureName) => {
       const injectedClosure = closuresMap[closureName];
@@ -21,13 +23,7 @@ export default function bindClosures(closuresMap) {
     };
 
     spec.render = function render() {
-      const newProps = {
-        ...this.props,
-        ...this.__closures,
-      };
-
-      console.log(newProps, newProps.props);
-      return Component(newProps);
+      return component(this.props, this.__closures);
     };
 
     const Wrapper = React.createClass(spec);
