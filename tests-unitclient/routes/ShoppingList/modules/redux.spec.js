@@ -186,6 +186,17 @@ describe('(Redux Module) Counter', () => {
     })
   })
 
+  describe('(Action Handler) SKIPCHANGE', () => {
+    it('Should just return the current state', () => {
+      let state = reducer(undefined, {})
+
+      state = reducer(state, redux.addDevFromOrg('xcvxcvnmm'))
+      expect(state).to.eql(shoppinglist)
+      state = reducer(state, redux.addDevFromName('xcvxcvnmm'))
+      expect(state).to.eql(shoppinglist)
+    })
+  })
+
   describe('(Action Handler) RESETSTATE', () => {
     it('Should reset the state', () => {
       let state = reducer({test: 1}, {})

@@ -1,16 +1,24 @@
-.counter {
-  font-weight: bold;
-}
-
-.counter--green {
-  composes: counter;
-  color: rgb(25,200,25);
-}
-
-.counterContainer {
-  margin: 1em auto;
-}
-
 .devPhoto {
   box-shadow:  4px 3px 3px black;
+}
+
+.shoppingcard {
+
+}
+
+.importRow {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.centerCol {
+  margin: auto;
+}
+
+@media (min-width: 770px) {
+  .shoppingcard {
+    position: fixed;
+    width: 290;
+    margin-right: 10px;
+  }
 }

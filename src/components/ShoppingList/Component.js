@@ -1,15 +1,16 @@
 import React from 'react';
 import classes from './Component.scss';
 import * as _ from 'lodash';
+import bindClosures from 'store/binder';
 
-const listElement = (ctx) => (
-  <div className="well developer-entry" id={`${ctx.e.login}-data`}>
+const listElement = ({props, element, addToCard, removeFromCard, calculatePrice}) => (
+  <div key={`developer-entry-${element.login}`} className="well developer-entry" id={`${element.login}-data`}>
     <div className="media">
       <div className="media-left media-top">
         <a href="#">
           <img
             className={classes.devPhoto}
-            src={ctx.e.avatar_url} alt={ctx.e.login} style={{
+            src={element.avatar_url} alt={element.login} style={{
               maxWidth: 100,
             }}
           />
@@ -17,7 +18,7 @@ const listElement = (ctx) => (
       </div>
       <div className="media-body">
         <h4 className="media-heading">
-          {ctx.e.login}
+          {element.login}
         </h4>
 
         <table className="table table-bordered table-hovered">
@@ -25,32 +26,30 @@ const listElement = (ctx) => (
 
             <tr>
               <td>Followers</td>
-              <td>{ctx.e.followers}</td>
+              <td>{element.followers}</td>
             </tr>
             <tr>
               <td>Gists</td>
-              <td>{ctx.e.public_gists}</td>
+              <td>{element.public_gists}</td>
             </tr>
             <tr>
               <td>Repos</td>
-              <td>{ctx.e.public_repos}</td>
+              <td>{element.public_repos}</td>
             </tr>
             <tr>
               <td>Registered since</td>
-              <td>{new Date(ctx.e.created_at).getUTCFullYear()}</td>
+              <td>{new Date(element.created_at).getUTCFullYear()}</td>
             </tr>
             <tr>
               <td>Estimated price (hourly)</td>
-              <td><span className="price">{ctx.e.appAdded.price}</span>$</td>
+              <td><span className="price">{element.appAdded.price}</span>$</td>
             </tr>
             <tr>
               <td>Ordered hours</td>
               <td>
                 <input
-                  className="form-control hours" value={ctx.e.appAdded.orderedHours}
-                  disabled={ctx.e.isInCard} onChange={ctx
-                  .calculatePrice
-                  .bind(null, ctx.e)} type="number"
+                  className="form-control hours" value={element.appAdded.orderedHours}
+                  disabled={element.isInCard} onChange={calculatePrice} type="number"
                 />
               </td>
             </tr>
@@ -59,24 +58,14 @@ const listElement = (ctx) => (
 
         <div className="">
           <button
-            disabled={!ctx.e.appAdded.orderedHours} style={{
-              display: ctx.e.isInCard
-                ? 'none'
-                : 'inherit'
-            }} className="btn btn-block btn-success add-to-card" onClick={ctx
-            .addToCard
-            .bind(null, ctx.e)}
-           >
-            Add {ctx.e.login} to card for {ctx.e.appAdded.totalSum}$
+            disabled={!element.appAdded.orderedHours}
+            hidden={element.isInCard}
+            className="btn btn-block btn-success add-to-card" onClick={addToCard}
+          >
+            Add {element.login} to cart for {element.appAdded.totalSum}$
           </button>
           <button
-            className="btn btn-block btn-warning" style={{
-              display: ctx.e.isInCard
-                ? 'inherit'
-                : 'none',
-            }} onClick={ctx
-            .removeFromCard
-            .bind(null, ctx.e)}>Remove from cart
+            className="btn btn-block btn-warning" hidden={!element.isInCard} onClick={removeFromCard}>Remove from cart
           </button>
         </div>
       </div>
@@ -84,8 +73,21 @@ const listElement = (ctx) => (
   </div>
 );
 
-const listShoppingCard = (ctx) => (
-  <li className="list-group-item">
+// Inject a new `onComplete` that receives the original props.
+const ListElement = bindClosures({
+  addToCard({props, element}) {
+    props.addToCard(element);
+  },
+  removeFromCard({props, element}) {
+    props.removeFromCard(element);
+  },
+  calculatePrice({props, element}, event) {
+    props.calculatePrice(element, event)
+  },
+})(listElement);
+
+const listShoppingCard = (ctx, i) => (
+  <li key={`shoppingcart-${ctx.e.login}`} className="list-group-item">
     {ctx.e.login}
     {' '}
     ({ctx.e.appAdded.orderedHours * ctx.e.appAdded.price}$)
@@ -96,11 +98,13 @@ const dv = e => document
   .querySelector(e)
   .value;
 
-const loadingBar = (props) => (
-  <div className="row">
-    <div className="col-sm-8">
+const loadingBar = () => (
+  <div className={`row ${classes.importRow}`}>
+    <div className={`col-sm-8 ${classes.centerCol}`}>
       <div className="progress">
-        <div className="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{width: '100%'}}>
+        <div className="progress-bar progress-bar-striped active"
+          role="progressbar" aria-valuenow="100" aria-valuemin="0"
+          aria-valuemax="100" style={{width: '100%'}}>
         </div>
       </div>
     </div>
@@ -114,33 +118,47 @@ const priceFormatWithDiscount = ({sumOriginal, discount, sum}) => (
   </div>
 );
 
-const renderPageLink = (ctx, i) => (
-  <li onClick={ctx.changePage.bind(null, i)}
-    className={i === ctx.currentPage ? 'active' : ''}><a href="#">{i + 1}</a></li>
+const renderPageLink = (ctx, i, cb) => (
+  <li key={`page-${i}`} onClick={cb.bind(null, i)}
+    className={i === ctx.currentPage ? 'active' : ''}><a href="#">{i + 1}</a>
+  </li>
 );
 
-const pagination = (props) => (
+const paginationRaw = (ctx) => (
   <ul
     className="pagination"
     style={{
-      display: props.pages > 1 ? 'table' : 'none',
+      display: ctx.props.pages > 1 ? 'table' : 'none',
       margin: '0 auto',
       marginBottom: 10,
     }}
   >
     <li>
-      <a href="#" aria-label="Previous" onClick={() => props.changePage(props.currentPage - 1)}>
+      <a href="#" aria-label="Previous" onClick={ctx.changePageBack}>
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    {_.range(props.pages).map(renderPageLink.bind(null, props))}
+    {_.range(ctx.props.pages).map(ctx.renderPageLink)}
     <li>
-      <a href="#" aria-label="Next" onClick={() => props.changePage(props.currentPage + 1)}>
+      <a href="#" aria-label="Next" onClick={ctx.changePageForward}>
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
   </ul>
 );
+
+// Inject a new `onComplete` that receives the original props.
+const Pagination = bindClosures({
+  changePageBack({props}) {
+    props.changePage(props.currentPage - 1);
+  },
+  renderPageLink({props}, i) {
+    return renderPageLink(props, i, props.changePage);
+  },
+  changePageForward({props}) {
+    props.changePage(props.currentPage + 1);
+  }
+})(paginationRaw);
 
 const redirect = (token) => {
   location.href = `${location.origin}/shoppingcard?token=${token}`;
@@ -148,19 +166,10 @@ const redirect = (token) => {
 
 export const ShoppingList = (props) => (
   <div>
-    <h5 className={classes.counterContainer}>
-      Devs in Shopping Card: {' '}
-      <span className={classes['counter--green']}>
-        {props.shoppingcard.length}
-      </span>
-    </h5>
-
     <div
-      className="row" style={{
-        marginBottom: 10,
-      }}
+      className={`row ${classes.importRow}`}
     >
-      <div className="col-sm-8">
+      <div className={`col-sm-8 ${classes.centerCol}`}>
         <div className="input-group">
           <span
             className="input-group-addon" style={{
@@ -183,11 +192,10 @@ export const ShoppingList = (props) => (
     </div>
 
     <div
-      className="row" style={{
-        marginBottom: 10,
-      }}
+      className={`row ${classes.importRow}`}
+
     >
-      <div className="col-sm-8">
+      <div className={`col-sm-8 ${classes.centerCol}`}>
         <div className="input-group">
           <span
             className="input-group-addon" style={{
@@ -213,33 +221,18 @@ export const ShoppingList = (props) => (
 
     <div className="row">
       <div id="developers-list" className="col-sm-8">
-        {pagination(props)}
+        <Pagination props={props} />
         {props
           .developers
           .slice(props.currentPage * props.devsOnPage, (props.currentPage + 1) * props.devsOnPage)
-          .map(e => listElement({
-            e,
-            ...props,
-          }))}
-          {pagination(props)}
+          .map(e => <ListElement props={props} element={e} />)}
+        <Pagination props={props} />
       </div>
 
       <div className="col-sm-4">
         <div
-          className="fixed" style={{
-            position: 'fixed',
-            width: 290,
-            margin: '10px',
-          }}
-        >
-
-        <div
-          className="panel panel-default"
-          style={{
-            display: props.shoppingcard.length
-            ? 'inherit'
-            : 'none',
-          }}
+          className={`panel panel-primary ${classes.shoppingcard}`}
+          hidden={!props.shoppingcard.length}
         >
           <div className="panel-heading">
             <h3 className="panel-title">Shopping cart</h3>
@@ -275,16 +268,13 @@ export const ShoppingList = (props) => (
             </div>
           </div>
         </div>
-
-
-        </div>
       </div>
     </div>
 
 
     <div
       id="confirmModal" className="modal fade text-center"
-      tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      role="dialog" aria-labelledby="myModalLabel"
     >
       <div className="modal-dialog">
         <div className="modal-content">
@@ -342,7 +332,7 @@ export const ShoppingList = (props) => (
               style={{
                 display: props.token ? 'inline' : 'none',
               }}
-              onClick={redirect.bind(null, props.token)}
+              onClick={props.redirect}
             >
             Go to the order
             </button>
@@ -368,4 +358,11 @@ ShoppingList.propTypes = {
   calculatePrice: React.PropTypes.func.isRequired,
 };
 
-export default ShoppingList;
+// Inject a new `onComplete` that receives the original props.
+const ShoppingListBinded = bindClosures({
+  redirect(props) {
+    redirect(props.token);
+  }
+})(ShoppingList);
+
+export default ShoppingListBinded;

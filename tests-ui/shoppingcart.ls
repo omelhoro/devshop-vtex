@@ -13,10 +13,11 @@ describe 'Shopping card', ->
 
     <- $ '#user-email' .sendKeys 'fischerig@outlook.com' .then!
     <- $ '#send-order-button' .click! .then!
+    <- browser.sleep 1000 .then!
     token <- $ '#order-token' .getText! .then!
-    <- $ '#reset-view-button' .click! .then!
-
     expect token.length .toEqual 36
+
+    <- $ '#reset-view-button' .click! .then!
 
     browser.get "http://localhost:3000/shoppingcard?token=#{token}"
     <- browser.sleep 4000 .then!

@@ -20,4 +20,7 @@
   *:after {
     box-sizing: inherit;
   }
+  td:first-child {
+    text-align: end;
+  }
 }

@@ -2,7 +2,9 @@ import React from 'react';
 import {IndexLink, Link} from 'react-router';
 import classes from './Header.scss';
 
-export const Header = () => (
+import { connect } from 'react-redux'
+
+export const Header = (props) => (
   <div className="text-center">
     <h1 className={classes.heading}>Developers Shop</h1>
     <IndexLink to="/" className={classes.headerLink} activeClassName={classes.activeRoute}>
@@ -10,9 +12,17 @@ export const Header = () => (
     </IndexLink>
     {' · '}
     <Link to="/shoppinglist" className={classes.headerLink} activeClassName={classes.activeRoute}>
-      Shopping List
+      Shopping List <span className={classes.shoppingcardCounter} hidden={!props.shoppingcard.length}>({props.shoppingcard.length})</span>
     </Link>
   </div>
 );
 
-export default Header;
+Header.defaultProps = {
+  shoppingcard: [],
+};
+
+const mapStateToProps = (state) => ({
+  ...state.shoppinglist,
+});
+
+export default connect(mapStateToProps, {})(Header);

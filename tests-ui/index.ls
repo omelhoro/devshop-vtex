@@ -1,7 +1,6 @@
 its = it
 
 describe 'Index page', ->
-  browser.ignoreSynchronization = true;
 
   beforeEach -> browser.get 'http://localhost:3000'
 
@@ -22,5 +21,4 @@ describe 'Index page', ->
     text <- (items.map (.getText!)
       |> Promise.all).then!
 
-    console.log(items, text)
     expect text .toEqual headers
