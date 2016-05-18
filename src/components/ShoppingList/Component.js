@@ -3,7 +3,7 @@ import classes from './Component.scss';
 import * as _ from 'lodash';
 import bindClosures from 'store/binder';
 
-const listElement = ({props, element, addToCard, removeFromCard, calculatePrice}) => (
+const listElement = ({element, addToCard, removeFromCard, calculatePrice}) => (
   <div key={`developer-entry-${element.login}`} className="well developer-entry" id={`${element.login}-data`}>
     <div className="media">
       <div className="media-left media-top">
@@ -65,7 +65,8 @@ const listElement = ({props, element, addToCard, removeFromCard, calculatePrice}
             Add {element.login} to cart for {element.appAdded.totalSum}$
           </button>
           <button
-            className="btn btn-block btn-warning" hidden={!element.isInCard} onClick={removeFromCard}>Remove from cart
+            className="btn btn-block btn-warning" hidden={!element.isInCard} onClick={removeFromCard}
+          >Remove from cart
           </button>
         </div>
       </div>
@@ -157,7 +158,7 @@ const Pagination = bindClosures({
   },
   changePageForward({props}) {
     props.changePage(props.currentPage + 1);
-  }
+  },
 })(paginationRaw);
 
 const redirect = (token) => {
@@ -356,13 +357,14 @@ ShoppingList.propTypes = {
   endOrdering: React.PropTypes.func.isRequired,
   sendOrder: React.PropTypes.func.isRequired,
   calculatePrice: React.PropTypes.func.isRequired,
+  redirect: React.PropTypes.func.isRequired,
 };
 
 // Inject a new `onComplete` that receives the original props.
 const ShoppingListBinded = bindClosures({
   redirect(props) {
     redirect(props.token);
-  }
+  },
 })(ShoppingList);
 
 export default ShoppingListBinded;
