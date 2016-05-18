@@ -1,4 +1,4 @@
-import { injectReducer } from '../../store/reducers'
+import {injectReducer} from '../../store/reducers';
 
 export default (store) => ({
   path: 'shoppingcard',
@@ -9,16 +9,16 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Counter = require('./containers/Container').default
-      const reducer = require('./modules/redux').default
+      const Counter = require('./containers/Container').default;
+      const reducer = require('./modules/redux').default;
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'shoppingcard', reducer })
+      injectReducer(store, {key: 'shoppingcard', reducer});
 
       /*  Return getComponent   */
-      cb(null, Counter)
+      cb(null, Counter);
 
     /* Webpack named bundle   */
-    }, 'counter')
+    }, 'counter');
   },
-})
+});

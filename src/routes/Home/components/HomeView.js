@@ -1,7 +1,6 @@
-import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import classes from './HomeView.scss'
+import React from 'react';
 
+/* eslint-disable max-len */
 export const HomeView = () => (
   <div id="" preview debounce={150}><h2 id="first-h2"><a id="Objetivo_0" />Objetivo</h2>
     <p>Criar o carrinho de compras de uma loja que vende desenvolvedores baseado no exemplo fornecido.</p>
@@ -35,6 +34,6 @@ export const HomeView = () => (
     <p>Não se preocupe se você não tem experiência em Go, Node ou React. Grande parte do nosso trabalho é lidar com novas tecnologias. Vamos levar isso em consideração.</p>
     <p>Boa sorte!</p>
   </div>
-)
+);
 
-export default HomeView
+export default HomeView;
