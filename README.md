@@ -13,7 +13,7 @@ How to start locally with live reload?
 
 And then go to http://localhost:3000
 
-Tested on the lastest Chrome and Firefox.
+Tested on the latest Chrome, Firefox and Edge browsers.
 
 ## Tarefas e priorização
 
