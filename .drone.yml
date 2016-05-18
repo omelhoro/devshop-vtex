@@ -2,6 +2,7 @@ build:
   image: node:6
   commands:
 
+    - echo $$VAULT_PASS_DEVSHOP
     - VAULT_PASS=$$VAULT_PASS_DEVSHOP ./vault/decrypt.sh
     - npm i --loglevel silent
 
