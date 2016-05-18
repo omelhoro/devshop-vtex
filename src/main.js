@@ -1,6 +1,10 @@
 // things for bootstrap
 import 'jquery';
 import 'bootstrap';
+import fetchPL from 'whatwg-fetch';
+import PromisePL from 'promise-polyfill';
+window.Promise = window.Promise || PromisePL;
+window.fetch = window.fetch || fetchPL;
 
 import React from 'react'
 import ReactDOM from 'react-dom'
