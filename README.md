@@ -33,7 +33,7 @@ We have now the basic functionalities of shop. So we're adding some features whi
 * Melhorar a visualização do desenvolvedor no carrinho mostrando mais informações.
   * After buying it's nice to view the developers not only with the price but also with parameters they were bought with
 * Permitir a adição de um cupom de desconto que altera o preço total da compra. Utilize o código "SHIPIT".
-  * That is not strictly required in a shop, so I've implemented it as last
+  * That is not strictly required for a shop in general, so I've implemented it as one of the last tasks
 * Criar paginação para a lista de desenvolvedores.
   * That was the last implemented feature since I'm not a big fan of paginations, but more of infinite scrolling
 
@@ -59,8 +59,7 @@ We have now the basic functionalities of shop. So we're adding some features whi
 
 ## Client side
 
-* ReactJS
-* Redux
+* ReactJS & Redux
 * Webpack
 * SASS
 * Bootstrap
