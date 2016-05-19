@@ -30,8 +30,8 @@ pre: echo -e "\033]6;1;bg;blue;brightness;255\a"
 
 windows:
   - server:
-      layout: tile
+      layout: even-horizontal
       pre: cd app
       panes:
         - npm run dev
-        - 
+        -
