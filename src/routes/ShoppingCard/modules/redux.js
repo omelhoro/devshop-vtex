@@ -26,7 +26,7 @@ function setState(state) {
 
 export function loadState(token) {
   return async (dispatch) => {
-    const out = await fetch(`/getorder?token=${token}`);
+    const out = await fetch(`/api/getorder?token=${token}`);
     const outJson = await out.json();
     dispatch(setState(outJson));
   };

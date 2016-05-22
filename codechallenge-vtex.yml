@@ -8,7 +8,7 @@ root: ~/dev/own/codechallenge-vtex/
 
 # Runs before everything. Use it to start daemons etc.
 # pre: sudo /etc/rc.d/mysqld start
-pre: echo -e "\033]6;1;bg;blue;brightness;255\a"
+pre: echo -e "\033]6;1;bg;red;brightness;255\a"
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
@@ -30,8 +30,8 @@ pre: echo -e "\033]6;1;bg;blue;brightness;255\a"
 
 windows:
   - server:
-      layout: tile
+      layout: even-horizontal
       pre: cd app
       panes:
         - npm run dev
-        - 
+        -
