@@ -91,20 +91,25 @@ const ListElement = bindClosures({
   },
 })(listElement);
 
-const listShoppingCard = ({props, ctx}, closures) => (
-  <li key={`shoppingcart-${props.login}`} className="list-group-item">
-    {props.login}
+const listShoppingCard = ({element, ctx}, closures) => (
+  <li key={`shoppingcart-${element.login}`} className="list-group-item">
+    {element.login}
     {' '}
-    ({props.appAdded.orderedHours * props.appAdded.price}$)
+    ({element.appAdded.orderedHours * element.appAdded.price}$)
     <button className="btn btn-xs btn-warning pull-right" onClick={closures.removeFromCard}>X</button>
   </li>
 );
 
+listShoppingCard.propTypes = {
+  element: React.PropTypes.object.isRequired,
+  ctx: React.PropTypes.object.isRequired,
+};
+
 const ListShoppingCard = bindClosures({
   removeFromCard({ctx, props}) {
     ctx.removeFromCard(props);
-  }
-})(listShoppingCard)
+  },
+})(listShoppingCard);
 
 const dv = e => document
   .querySelector(e)
@@ -269,7 +274,7 @@ export const ShoppingList = (props, closures) => (
               <ul className="list-group">
                 {props
                   .shoppingcard
-                  .map(e => <ListShoppingCard ctx={props} props={e} /> )}
+                  .map(e => <ListShoppingCard ctx={props} element={e} />)}
               </ul>
               <div>
                 <div className="input-group">
