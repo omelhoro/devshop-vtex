@@ -83,7 +83,7 @@ export const ShoppingCard = (props) => (
   <div>
     {loadInitialState(props)}
     <h2 className={classes.counterContainer}>
-      Your shopping card from {moment(props.timestamp).format('HH:mm DD-MM-YYYY')} with a value of {props.sum}$
+      Your shopping cart from <i>{moment(props.timestamp).format('HH:mm DD-MM-YYYY')}</i> with a value of <i>{props.sum}$</i>
     </h2>
     {props.shoppingcard.map(listElement.bind(null, props))}
   </div>
