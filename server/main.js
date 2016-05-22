@@ -12,10 +12,10 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/getmembers', getMembersOfOrg);
-app.get('/getdev', getDeveloper);
-app.post('/postorder', processOrder);
-app.get('/getorder', getOrder);
+app.get('/api/getmembers', getMembersOfOrg);
+app.get('/api/getdev', getDeveloper);
+app.post('/api/postorder', processOrder);
+app.get('/api/getorder', getOrder);
 
 if (isDeveloping) {
   /* eslint-disable global-require */
