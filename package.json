@@ -23,7 +23,7 @@
     "test-ui": "protractor tests-ui/conf.babel.js",
     "test-unitserver": "mocha --harmony --reporter spec --compilers js:babel-register --compilers ls:livescript tests-unitserver",
     "test-integration": "mocha --harmony --reporter spec --compilers js:babel-register --compilers ls:livescript tests-integration",
-    "test-unitclient": "better-npm-run test",
+    "test-unitclient": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
@@ -67,7 +67,7 @@
       }
     },
     "test": {
-      "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
+      "command": "npm run test-unitserver && npm run test-integration && npm run test-unitclient && npm run lint",
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "app:*"
