@@ -68,7 +68,7 @@ export function addDevFromName(dev) {
 
   return async (dispatch) => {
     dispatch(setLoadingState(true));
-    const out = await fetch(`/getdev?dev=${dev}`);
+    const out = await fetch(`/api/getdev?dev=${dev}`);
     dispatch(setLoadingState(false));
     switch (out.status) {
       case 200: {
@@ -108,7 +108,7 @@ export function changePage(page) {
 
 export function loadStateFromToken(token) {
   return async (dispatch) => {
-    const out = await fetch(`/getorder?token=${token}`);
+    const out = await fetch(`/api/getorder?token=${token}`);
     const outJson = await out.json();
     dispatch(loadState(outJson));
   };
@@ -130,7 +130,7 @@ export function sendOrder(email) {
       body: JSON.stringify(state),
     };
 
-    const out = await fetch('/postorder', request);
+    const out = await fetch('/api/postorder', request);
     const outJson = await out.json();
     dispatch(setToken(outJson.token));
   };
@@ -146,7 +146,7 @@ export function addDevFromOrg(org) {
 
   return async (dispatch) => {
     dispatch(setLoadingState(true));
-    const out = await fetch(`/getmembers?org=${org}`);
+    const out = await fetch(`/api/getmembers?org=${org}`);
     dispatch(setLoadingState(false));
     switch (out.status) {
       case 200: {
