@@ -106,8 +106,8 @@ listShoppingCard.propTypes = {
 };
 
 const ListShoppingCard = bindClosures({
-  removeFromCard({ctx, props}) {
-    ctx.removeFromCard(props);
+  removeFromCard({ctx, element}) {
+    ctx.removeFromCard(element);
   },
 })(listShoppingCard);
 
