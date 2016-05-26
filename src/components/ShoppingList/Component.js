@@ -2,6 +2,7 @@ import React, {PropTypes as PT} from 'react';
 import classes from './Component.scss';
 import * as _ from 'lodash';
 import bindClosures from '../../store/binder';
+import moment from 'moment';
 
 const listElement = ({element}, {addToCard, removeFromCard, calculatePrice}) => (
   <div key={`developer-entry-${element.login}`} className="well developer-entry" id={`${element.login}-data`}>
@@ -96,6 +97,10 @@ const listShoppingCard = ({element, ctx}, closures) => (
     {element.login}
     {' '}
     ({element.appAdded.orderedHours * element.appAdded.price}$)
+    <br />
+    <small>
+      Added {moment(element.addedToCart).format('[on] DD.MM.YYYY [at] HH:mm')}
+    </small>
     <button className="btn btn-xs btn-warning pull-right" onClick={closures.removeFromCard}>X</button>
   </li>
 );
