@@ -231,7 +231,7 @@ const ACTION_HANDLERS = {
       return state;
     }
 
-    const developer = {...state.developers[ixIsInCard], isInCard: true};
+    const developer = {...state.developers[ixIsInCard], isInCard: true, addedToCart: new Date()};
 
     const developers = [
       ...state.developers.slice(0, ixIsInCard),
@@ -323,7 +323,7 @@ const ACTION_HANDLERS = {
     const ixIsInCard = _.findIndex(state.developers, e => e.login === action.item.login);
     const developers = [
       ...state.developers.slice(0, ixIsInCard),
-      {...state.developers[ixIsInCard], isInCard: false},
+      {...state.developers[ixIsInCard], isInCard: false, addedToCart: null},
       ...state.developers.slice(ixIsInCard + 1),
     ];
 
