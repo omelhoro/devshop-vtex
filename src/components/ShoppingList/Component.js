@@ -203,24 +203,29 @@ export const ShoppingList = (props, closures) => (
       className={`row ${classes.importRow}`}
     >
       <div className={`col-sm-8 ${classes.centerCol}`}>
-        <div className="input-group">
-          <span
-            className="input-group-addon" style={{
-              minWidth: 120,
-            }}
-          >
-            User
-          </span>
-          <input id="dev-name" className="form-control" type="text" placeholder="e.g. omelhoro" />
-          <span className="input-group-btn">
-            <button
-              id="import-developer" className="btn btn-default" type="button"
-              onClick={() => props.addDevFromName(dv('#dev-name'))}
+        <form action="#" onSubmit={() => props.addDevFromName(dv('#dev-name'))}>
+          <div className="input-group">
+            <span
+              className="input-group-addon" style={{
+                minWidth: 120,
+              }}
             >
-              Import!
-            </button>
-          </span>
-        </div>
+              User
+            </span>
+            <input
+              autoFocus={!props.developers.length}
+              id="dev-name" className="form-control"
+              type="text" placeholder="e.g. omelhoro"
+            />
+            <span className="input-group-btn">
+              <button
+                id="import-developer" className="btn btn-default" type="submit"
+              >
+                Import!
+              </button>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -229,24 +234,27 @@ export const ShoppingList = (props, closures) => (
 
     >
       <div className={`col-sm-8 ${classes.centerCol}`}>
-        <div className="input-group">
-          <span
-            className="input-group-addon" style={{
-              minWidth: 120,
-            }}
-          >
-            Organization
-          </span>
-          <input id="org-name" className="form-control" type="text" placeholder="e.g. Homebrew" />
-          <span className="input-group-btn">
-            <button
-              id="import-organization" className="btn btn-default"
-              type="button" onClick={() => props.addDevFromOrg(dv('#org-name'))}
+        <form action="#" onSubmit={() => props.addDevFromOrg(dv('#org-name'))}>
+          <div className="input-group">
+            <span
+              className="input-group-addon" style={{
+                minWidth: 120,
+              }}
             >
-              Import!
-            </button>
-          </span>
-        </div>
+              Organization
+            </span>
+            <input id="org-name" className="form-control" type="text" placeholder="e.g. Homebrew" />
+            <span className="input-group-btn">
+              <button
+                id="import-organization"
+                className="btn btn-default"
+                type="submit"
+              >
+                Import!
+              </button>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
 
