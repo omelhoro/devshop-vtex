@@ -15,7 +15,7 @@ function getParameterByName(name, url) {
 /* eslint-enable */
 
 const listElement = (ctx, e) => (
-  <div className="well developer-entry">
+  <div key={`${e.login}-bought`} className="well developer-entry">
     <div className="media">
       <div className="media-left media-top">
         <a href="#">
@@ -94,8 +94,8 @@ export const ShoppingCard = (props) => (
 ShoppingCard.propTypes = {
   shoppingcard: React.PropTypes.array.isRequired,
   loadState: React.PropTypes.func.isRequired,
-  timestamp: React.PropTypes.string.isRequired,
-  sum: React.PropTypes.number.isRequired,
+  timestamp: React.PropTypes.string,
+  sum: React.PropTypes.number,
 };
 
 export default ShoppingCard;
