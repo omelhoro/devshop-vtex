@@ -52,6 +52,7 @@ describe('(Redux Module) Counter', () => {
     });
   });
 
+
   // NOTE: if you have a more complex state, you will probably want to verify
   // that you did not mutate the state. In this case our state is just a number
   // (which cannot be mutated).
@@ -70,7 +71,7 @@ describe('(Redux Module) Counter', () => {
 
       state = reducer(state, redux.addToDevList(testDev));
       state = reducer(state, redux.addToCard(testDev));
-      expect(state.shoppingcard).to.eql([{...testDev, isInCard: true}]);
+      expect(state.shoppingcard).to.eql([{...testDev, isInCard: true, addedToCart: state.shoppingcard[0].addedToCart}]);
 
     });
   });
@@ -223,7 +224,7 @@ describe('(Redux Module) Counter', () => {
 
       state = reducer(state, redux.addToDevList(testDev));
       state = reducer(state, redux.addToCard(testDev));
-      expect(state.shoppingcard).to.eql([{...testDev, isInCard: true}]);
+      expect(state.shoppingcard).to.eql([{...testDev, isInCard: true, addedToCart: state.shoppingcard[0].addedToCart}]);
 
       state = reducer(state, redux.removeFromCard(testDev));
       expect(state.shoppingcard).to.eql([]);
