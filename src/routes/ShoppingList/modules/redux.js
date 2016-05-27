@@ -58,7 +58,8 @@ export function setLoadingState(loading) {
   };
 }
 
-export function addDevFromName(dev) {
+export function addDevFromName(dev, event = {preventDefault() {}}) {
+  event.preventDefault();
   if (!dev) {
     alert('No input');
     return {
@@ -136,7 +137,8 @@ export function sendOrder(email) {
   };
 }
 
-export function addDevFromOrg(org) {
+export function addDevFromOrg(org, event = {preventDefault() {}}) {
+  event.preventDefault();
   if (!org) {
     alert('No input');
     return {
