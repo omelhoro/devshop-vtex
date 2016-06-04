@@ -3,9 +3,9 @@ services:
   devshop-vtex:
     image: omelhoro1/devshop-vtex
     container_name: devshop-vtex
+    restart: unless-stopped
     # ports:
     #   - "3000:3000"
-    restart: unless-stopped
     volumes:
       - /tmp/db:/app/db
     environment:
@@ -17,7 +17,21 @@ services:
       - LETSENCRYPT_EMAIL=fischerig@outlook.com
     networks:
       - proxy-tier
-
+  devshop-vtex-ng2:
+    image: omelhoro1/devshop-ng2
+    container_name: devshop-ng2
+    restart: unless-stopped
+    # ports:
+    #   - "3001:3001"
+    environment:
+      - VIRTUAL_HOST=devshop-ng2.igor-fischer.rocks
+      - LETSENCRYPT_HOST=devshop-ng2.igor-fischer.rocks
+      - VIRTUAL_NETWORK=proxy-tier
+      - VIRTUAL_PORT=3001
+      - PROXY_URL=http://devshop-vtex:3000
+      - LETSENCRYPT_EMAIL=fischerig@outlook.com
+    networks:
+      - proxy-tier
 networks:
   proxy-tier:
     external: true
