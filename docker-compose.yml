@@ -5,6 +5,7 @@ services:
     container_name: devshop-vtex
     # ports:
     #   - "3000:3000"
+    restart: unless-stopped
     volumes:
       - /tmp/db:/app/db
     environment:
