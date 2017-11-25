@@ -3,8 +3,6 @@ pipeline:
     image: node
     secrets: [ vault_pass ]
     commands:
-      - echo "$${VAULT_PASS}"
-
       - npm i --loglevel silent
 
       # - wget -c wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
