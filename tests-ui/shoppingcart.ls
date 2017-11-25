@@ -8,18 +8,14 @@ describe 'Shopping card', ->
     <- utils.addToCard 'omelhoro', 5
     <- utils.addToCard 'core-process', 10
 
-    <- $ '#open-modal-confirm' .click! .then!
-    <- browser.sleep 1000 .then!
-
-    <- $ '#user-email' .sendKeys 'fischerig@outlook.com' .then!
-    <- $ '#send-order-button' .click! .then!
-    <- browser.sleep 1000 .then!
-    token <- $ '#order-token' .getText! .then!
-    expect token.length .toEqual 36
-
-    <- $ '#reset-view-button' .click! .then!
-
-    browser.get "http://localhost:3000/shoppingcard?token=#{token}"
-    <- browser.sleep 4000 .then!
-    count <- $$ '.developer-entry' .count! .then!
-    expect count .toEqual 2
+    <- $ '#open-modal-confirm' .click!
+      .then -> browser.sleep 1000
+      .then -> ($ '#user-email' .sendKeys 'fischerig@outlook.com')
+      .then -> ($ '#send-order-button' .click!)
+      .then -> (browser.sleep 1000)
+      .then -> ($ '#order-token' .getText!)
+      .then (token) -> (expect token.length .toEqual 36)
+      .then -> ($ '#reset-view-button' .click!)
+      .then -> (browser.sleep 4000)
+      .then -> ($$ '.developer-entry' .count!)
+      .then (count) -> (expect count .toEqual 2)
