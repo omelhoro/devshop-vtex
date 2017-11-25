@@ -1,18 +1,5 @@
 pipeline:
-  build:
-    image: node
-    secrets: [ vault_pass ]
-    commands:
-      - npm i --loglevel silent
-      # - npm rebuild leveldown
-      # - npm rebuild levelup
-      # - npm rebuild node-sass
-      # - npm rebuild phantomjs-prebuilt
-      - VAULT_PASS="$${VAULT_PASS}" ./vault/decrypt.sh
-      - npm run test-unitserver
-      - DB_PATH=/tmp/db npm run test-integration
-      - npm run test-unitclient
-      - npm run lint
+
 
   docker:
     image: plugins/docker
