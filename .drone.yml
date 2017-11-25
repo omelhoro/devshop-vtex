@@ -15,10 +15,10 @@ pipeline:
       # - webdriver-manager start &
       # - npm run test-ui
 
-      - npm rebuild leveldown
-      - npm rebuild levelup
-      - npm rebuild node-sass
-      - npm rebuild phantomjs-prebuilt
+      # - npm rebuild leveldown
+      # - npm rebuild levelup
+      # - npm rebuild node-sass
+      # - npm rebuild phantomjs-prebuilt
 
       - VAULT_PASS="$${VAULT_PASS}" ./vault/decrypt.sh
 
