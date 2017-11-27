@@ -1,4 +1,4 @@
-FROM node
+FROM mhart/alpine-node:latest
 
 RUN mkdir /app
 ENV NODE_ENV production

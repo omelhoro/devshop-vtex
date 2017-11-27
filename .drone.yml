@@ -1,6 +1,7 @@
 pipeline:
+
   build:
-    image: node
+    image: mhart/alpine-node:latest
     secrets: [ vault_pass ]
     commands:
       - npm i --loglevel silent
@@ -38,7 +39,7 @@ pipeline:
   deploy:
     image: drillster/drone-rsync
     user: captain
-    hosts: [ "igor-fischer.rocks" ]
+    hosts: [ "software-unchained.com" ]
     port: 22
     target: /tmp/devshop-vtex-${DRONE_COMMIT}/
     include:
