@@ -12,7 +12,6 @@ const _debug = require('debug');
 const debug = _debug('app:karma');
 debug('Create configuration.');
 
-console.log(webpackConfig);
 const karmaConfig = {
   files: [
     './node_modules/phantomjs-polyfill/bind-polyfill.js',
