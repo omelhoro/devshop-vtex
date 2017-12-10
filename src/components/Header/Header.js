@@ -4,14 +4,14 @@ import classes from './Header.css';
 
 import {connect} from 'react-redux';
 
-export const Header = (props) => (
-  <div className="text-center">
+export const Header = props => (
+  <div className='text-center'>
     <h1 className={classes.heading}>Developers Shop</h1>
-    <IndexLink to="/" className={classes.headerLink} activeClassName={classes.activeRoute}>
+    <IndexLink to='/' className={classes.headerLink} activeClassName={classes.activeRoute}>
       The Task
     </IndexLink>
     {' · '}
-    <Link to="/shoppinglist" className={classes.headerLink} activeClassName={classes.activeRoute}>
+    <Link to='/shoppinglist' className={classes.headerLink} activeClassName={classes.activeRoute}>
       Shopping List
       {' '}
       <span
@@ -32,7 +32,7 @@ Header.propTypes = {
   shoppingcard: React.PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   ...state.router,
   shoppingcard: state.shoppinglist ? state.shoppinglist.shoppingcard : [],
 });

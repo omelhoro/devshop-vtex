@@ -1,7 +1,10 @@
 const BP = require('bluebird');
-import { errorHandler, calculateHoursPrice } from '../lib/utils';
-import { github as githubCreds } from '../../vault/secret/credentials';
+
+import {errorHandler, calculateHoursPrice} from '../lib/utils';
+import {github as githubCreds} from '../../vault/secret/credentials';
+
 const GitHubApi = require('github');
+
 const github = new GitHubApi({
   // required
   version: '3.0.0',
@@ -21,10 +24,10 @@ github.authenticate({
   token: githubCreds.token,
 });
 
-async function getSingleUser({ login }) {
-  const out = await BP.promisify(github.users.getForUser)({ username: login });
+async function getSingleUser({login}) {
+  const out = await BP.promisify(github.users.getForUser)({username: login});
   const user = out.data;
-  return { ...user, appAdded: { price: calculateHoursPrice(user), orderedHours: 0 } };
+  return {...user, appAdded: {price: calculateHoursPrice(user), orderedHours: 0}};
 }
 
 async function getMembersOfOrgAsync(req, res) {
@@ -33,13 +36,13 @@ async function getMembersOfOrgAsync(req, res) {
     return;
   }
 
-  const out = await BP.promisify(github.orgs.getMembers)({ org: req.query.org });
+  const out = await BP.promisify(github.orgs.getMembers)({org: req.query.org});
   const enrichedData = await Promise.all(out.data.map(getSingleUser));
   res.send(enrichedData);
 }
 
 async function getDeveloperAsync(req, res) {
-  const out = await getSingleUser({ login: req.query.dev });
+  const out = await getSingleUser({login: req.query.dev});
   res.send(out);
 }
 

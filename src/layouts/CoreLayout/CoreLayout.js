@@ -4,7 +4,7 @@ import classes from './CoreLayout.css';
 import '../../styles/core.css';
 
 export const CoreLayout = ({children}) => (
-  <div className="container">
+  <div className='container'>
     <Header />
     <div className={classes.mainContainer}>
       {children}

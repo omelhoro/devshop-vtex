@@ -2,7 +2,9 @@ import React, {PropTypes} from 'react';
 import {Router} from 'react-router';
 import {Provider} from 'react-redux';
 
-const appContainer = ({history, routes, routerKey, store}) => (
+const appContainer = ({
+  history, routes, routerKey, store,
+}) => (
   <Provider store={store}>
     <div style={{height: '100%'}}>
       <Router history={history} children={routes} key={routerKey} />

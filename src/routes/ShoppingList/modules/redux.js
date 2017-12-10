@@ -300,8 +300,11 @@ const ACTION_HANDLERS = {
   },
   [USECOUPON]: (state, action) => {
     const preState =
-    {...state, coupon: action.value,
-      discount: action.discount};
+    {
+      ...state,
+      coupon: action.value,
+      discount: action.discount,
+    };
     return {
       ...preState,
       ...calculateSum(preState),

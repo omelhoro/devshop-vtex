@@ -3,14 +3,15 @@ import 'jquery';
 import 'bootstrap';
 import fetchPL from 'whatwg-fetch';
 import PromisePL from 'promise-polyfill';
+
 window.Promise = window.Promise || PromisePL;
 window.fetch = window.fetch || fetchPL;
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import { useRouterHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import {useRouterHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
 
@@ -31,7 +32,7 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 const initialState = window.___INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 const store = createStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.router,
+  selectLocationState: state => state.router,
 });
 
 // ========================================================
@@ -58,7 +59,7 @@ let render = (routerKey = null) => {
       routes={routes}
       routerKey={routerKey}
     />,
-    MOUNT_NODE
+    MOUNT_NODE,
   );
 };
 

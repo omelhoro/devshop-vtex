@@ -39,8 +39,8 @@ export default (initialState = initialStateDefault, history) => {
     initialState,
     compose(
       applyMiddleware(...middleware),
-      ...enhancers
-    )
+      ...enhancers,
+    ),
   );
   store.asyncReducers = {};
 

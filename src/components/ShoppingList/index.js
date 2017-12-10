@@ -7,15 +7,14 @@ import Modal from './ConfirmModal';
 import {priceFormatWithDiscount, Pagination, loadingBar} from './MiniComponents';
 
 
-
-export const ShoppingList = (props) => (
-  <div className="centerCol">
+export const ShoppingList = props => (
+  <div className='centerCol'>
     <SearchBar props={props} />
 
     {props.loading ? loadingBar(props) : ''}
 
-    <div className="row">
-      <div id="developers-list" className="col-sm-8">
+    <div className='row'>
+      <div id='developers-list' className='col-sm-8'>
         <Pagination props={props} />
         {props
           .developers
@@ -23,34 +22,39 @@ export const ShoppingList = (props) => (
           .map(e => <ListElement key={`developer-entry-${e.login}`} props={props} element={e} />)}
         <Pagination props={props} />
       </div>
-      <div className="col-sm-4">
+      <div className='col-sm-4'>
         <div
           className={`panel panel-primary ${classes.shoppingcard}`}
           hidden={!props.developers.length}
         >
-          <div className="panel-heading">
-            <h3 className="panel-title">Shopping cart</h3>
+          <div className='panel-heading'>
+            <h3 className='panel-title'>Shopping cart</h3>
           </div>
-          <div className="panel-body">
+          <div className='panel-body'>
             <div hidden={!props.shoppingcard.length}>
-              <ul className="list-group">
+              <ul className='list-group'>
                 {props
                   .shoppingcard
                   .map(e => <ListShoppingCard ctx={props} element={e} />)}
               </ul>
               <div>
-                <div className="input-group">
-                  <span className="input-group-addon">Coupon</span>
+                <div className='input-group'>
+                  <span className='input-group-addon'>Coupon</span>
                   <input
-                    id="coupon-entry"
-                    placeholder="SHIPIT" value={props.coupon}
-                    onChange={props.useCoupon} className="form-control" type="text"
+                    id='coupon-entry'
+                    placeholder='SHIPIT'
+                    value={props.coupon}
+                    onChange={props.useCoupon}
+                    className='form-control'
+                    type='text'
                   />
                 </div>
                 {priceFormatWithDiscount(props)}
                 <button
-                  id="open-modal-confirm"
-                  data-toggle="modal" data-target="#confirmModal" className="btn btn-block btn-info"
+                  id='open-modal-confirm'
+                  data-toggle='modal'
+                  data-target='#confirmModal'
+                  className='btn btn-block btn-info'
                 >
                   Order
                 </button>

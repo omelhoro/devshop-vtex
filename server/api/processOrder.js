@@ -1,14 +1,16 @@
-import { errorHandler } from '../lib/utils';
+import {errorHandler} from '../lib/utils';
+
 const BP = require('bluebird');
 const levelup = require('levelup');
 const leveldown = require('leveldown');
 const uuid = require('node-uuid');
+
 const db = BP.promisifyAll(levelup(leveldown(process.env.DB_PATH || './db')));
-import { sendToken } from '../lib/emailService';
+import {sendToken} from '../lib/emailService';
 
 async function processOrderAsync(req, res) {
   const token = uuid.v1();
-  await db.putAsync(token, JSON.stringify({ ...req.body.appState, token }));
+  await db.putAsync(token, JSON.stringify({...req.body.appState, token}));
   const matchHost = /^https?:\/\/.*\//;
   let host = '';
   if (req.headers && req.headers.referer) {
@@ -16,8 +18,8 @@ async function processOrderAsync(req, res) {
   } else {
     host = req.get ? req.get('host') : '';
   }
-  sendToken({ to: req.body.email, host, token }, console.log);
-  res.send({ token });
+  sendToken({to: req.body.email, host, token}, console.log);
+  res.send({token});
 }
 
 async function getOrderAsync(req, res) {
@@ -32,3 +34,37 @@ export const processOrder = (req, res) =>
 export const getOrder = (req, res) =>
   getOrderAsync(req, res)
     .catch(errorHandler.bind(res));
+
+
+function exitHandler(options, err) {
+  console.log("Exiting");
+  process.stdin.resume();//so the program will not close instantly
+
+  db.close(() => {
+    console.log('close db');
+    process.exit();
+  });
+
+  if (options.cleanup) console.log('clean');
+  if (err) console.log(err.stack);
+  if (options.exit) {
+    db.close(() => {
+      console.log('close db');
+      process.exit();
+    });
+  }
+}
+
+
+// do something when app is closing
+process.on('exit', exitHandler.bind(null, {cleanup: true}));
+
+// catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {exit: true}));
+
+// catches "kill pid" (for example: nodemon restart)
+process.on('SIGUSR1', exitHandler.bind(null, {exit: true}));
+process.on('SIGUSR2', exitHandler.bind(null, {exit: true}));
+
+// catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {exit: true}));

@@ -3,24 +3,26 @@ import React, {PropTypes as PT} from 'react';
 import classes from './index.css';
 
 const listElement = ({element}, {addToCard, removeFromCard, calculatePrice}) => (
-  <div className="well developer-entry" id={`${element.login}-data`}>
-    <div className="media">
-      <div className="media-left media-top">
-        <a href="#">
+  <div className='well developer-entry' id={`${element.login}-data`}>
+    <div className='media'>
+      <div className='media-left media-top'>
+        <a href='#'>
           <img
             className={classes.devPhoto}
-            src={element.avatar_url} alt={element.login} style={{
+            src={element.avatar_url}
+            alt={element.login}
+            style={{
               maxWidth: 100,
             }}
           />
         </a>
       </div>
-      <div className="media-body">
-        <h4 className="media-heading">
+      <div className='media-body'>
+        <h4 className='media-heading'>
           {element.login}
         </h4>
 
-        <table className="table table-bordered table-hovered">
+        <table className='table table-bordered table-hovered'>
           <tbody>
 
             <tr>
@@ -41,30 +43,36 @@ const listElement = ({element}, {addToCard, removeFromCard, calculatePrice}) => 
             </tr>
             <tr>
               <td>Estimated price (hourly)</td>
-              <td><span className="price">{element.appAdded.price}</span>$</td>
+              <td><span className='price'>{element.appAdded.price}</span>$</td>
             </tr>
             <tr>
               <td>Ordered hours</td>
               <td>
                 <input
-                  className="form-control hours" value={element.appAdded.orderedHours}
-                  disabled={element.isInCard} onChange={calculatePrice} type="number"
+                  className='form-control hours'
+                  value={element.appAdded.orderedHours}
+                  disabled={element.isInCard}
+                  onChange={calculatePrice}
+                  type='number'
                 />
               </td>
             </tr>
           </tbody>
         </table>
 
-        <div className="">
+        <div className=''>
           <button
             disabled={!element.appAdded.orderedHours}
             hidden={element.isInCard}
-            className="btn btn-block btn-success add-to-card" onClick={addToCard}
+            className='btn btn-block btn-success add-to-card'
+            onClick={addToCard}
           >
             Add {element.login} to cart for {element.appAdded.totalSum}$
           </button>
           <button
-            className="btn btn-block btn-warning" hidden={!element.isInCard} onClick={removeFromCard}
+            className='btn btn-block btn-warning'
+            hidden={!element.isInCard}
+            onClick={removeFromCard}
           >Remove from cart
           </button>
         </div>

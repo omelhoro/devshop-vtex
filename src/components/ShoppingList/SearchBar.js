@@ -8,10 +8,11 @@ const searchBar = ({props}) => (
       className={`row ${classes.importRow}`}
     >
       <div className={`col-sm-8 ${classes.centerCol}`}>
-        <form action="#" onSubmit={(event) => props.addDevFromName(dv('#dev-name'), event)}>
-          <div className="input-group">
+        <form action='#' onSubmit={event => props.addDevFromName(dv('#dev-name'), event)}>
+          <div className='input-group'>
             <span
-              className="input-group-addon" style={{
+              className='input-group-addon'
+              style={{
                 minWidth: 120,
               }}
             >
@@ -19,12 +20,16 @@ const searchBar = ({props}) => (
             </span>
             <input
               autoFocus={!props.developers.length}
-              id="dev-name" className="form-control"
-              type="text" placeholder="e.g. omelhoro"
+              id='dev-name'
+              className='form-control'
+              type='text'
+              placeholder='e.g. omelhoro'
             />
-            <span className="input-group-btn">
+            <span className='input-group-btn'>
               <button
-                id="import-developer" className="btn btn-default" type="submit"
+                id='import-developer'
+                className='btn btn-default'
+                type='submit'
               >
                 Import!
               </button>
@@ -38,21 +43,22 @@ const searchBar = ({props}) => (
       className={`row ${classes.importRow}`}
     >
       <div className={`col-sm-8 ${classes.centerCol}`}>
-        <form action="#" onSubmit={(event) => props.addDevFromOrg(dv('#org-name'), event)}>
-          <div className="input-group">
+        <form action='#' onSubmit={event => props.addDevFromOrg(dv('#org-name'), event)}>
+          <div className='input-group'>
             <span
-              className="input-group-addon" style={{
+              className='input-group-addon'
+              style={{
                 minWidth: 120,
               }}
             >
               Organization
             </span>
-            <input id="org-name" className="form-control" type="text" placeholder="e.g. Homebrew" />
-            <span className="input-group-btn">
+            <input id='org-name' className='form-control' type='text' placeholder='e.g. Homebrew' />
+            <span className='input-group-btn'>
               <button
-                id="import-organization"
-                className="btn btn-default"
-                type="submit"
+                id='import-organization'
+                className='btn btn-default'
+                type='submit'
               >
                 Import!
               </button>

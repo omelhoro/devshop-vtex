@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
-const config = require('../build/webpack.config').default;
 const bodyParser = require('body-parser');
+const config = require('../webpack.config').default;
 
 import {getMembersOfOrg, getDeveloper} from './api/githubApi';
 import {processOrder, getOrder} from './api/processOrder';
