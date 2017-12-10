@@ -1,0 +1,13 @@
+version: '2'
+services:
+
+  devshop-vtex:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+      - ./node_modules-docker:/app/node_modules
+      - /tmp/db:/app/db

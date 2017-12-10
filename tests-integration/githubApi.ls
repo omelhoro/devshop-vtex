@@ -13,6 +13,7 @@ describe 'Servers ', ->
       send: (data) ->
         assert req.query.dev, data.login
         done!
+    return
 
   its 'should get memebers of org', (done) ->
     this.timeout(5000);
@@ -24,3 +25,4 @@ describe 'Servers ', ->
       send: (data) ->
         assert true, !data.length
         done!
+    return

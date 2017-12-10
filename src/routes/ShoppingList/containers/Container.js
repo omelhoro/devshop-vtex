@@ -16,7 +16,7 @@ const mapActionCreators = {
   ...actions,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   ...state.shoppinglist,
 });
 

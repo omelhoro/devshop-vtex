@@ -3,6 +3,7 @@ import 'jquery';
 import 'bootstrap';
 import fetchPL from 'whatwg-fetch';
 import PromisePL from 'promise-polyfill';
+
 window.Promise = window.Promise || PromisePL;
 window.fetch = window.fetch || fetchPL;
 
@@ -31,7 +32,7 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 const initialState = window.___INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 const store = createStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.router,
+  selectLocationState: state => state.router,
 });
 
 // ========================================================
@@ -58,7 +59,7 @@ let render = (routerKey = null) => {
       routes={routes}
       routerKey={routerKey}
     />,
-    MOUNT_NODE
+    MOUNT_NODE,
   );
 };
 
@@ -68,7 +69,6 @@ if (__DEV__ && module.hot) {
   const renderApp = render;
   const renderError = (error) => {
     const RedBox = require('redbox-react'); // eslint-disable-line global-require
-
     ReactDOM.render(<RedBox error={error} />, MOUNT_NODE);
   };
   render = () => {
