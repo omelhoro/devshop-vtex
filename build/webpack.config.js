@@ -15,8 +15,8 @@ const webpackConfig = {
   target: 'web',
   devtool: config.compiler_devtool,
   resolve: {
-    root: paths.client(),
-    extensions: ['', '.js', '.jsx', '.json'],
+    // root: paths.client(),
+    extensions: ['.js', '.jsx', '.json'],
   },
   module: {},
 };
@@ -125,7 +125,7 @@ webpackConfig.eslint = {
 webpackConfig.module.loaders = [{
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
-  loader: 'babel',
+  loader: 'babel-loader',
   query: {
     cacheDirectory: true,
     plugins: ['transform-runtime'],
@@ -147,7 +147,7 @@ webpackConfig.module.loaders = [{
 // ------------------------------------
 // We use cssnano with the postcss loader, so we tell
 // css-loader not to duplicate minimization.
-const BASE_CSS_LOADER = 'css?sourceMap&-minimize';
+const BASE_CSS_LOADER = 'css-loader?sourceMap&-minimize';
 
 // Add any packge names here whose styles need to be treated as CSS modules.
 // These paths will be combined into a single regex.
@@ -174,78 +174,82 @@ if (isUsingCSSModules) {
     'localIdentName=[name]__[local]___[hash:base64:5]',
   ].join('&');
 
-  webpackConfig.module.loaders.push({
-    test: /\.scss$/,
-    include: cssModulesRegex,
-    loaders: [
-      'style',
-      cssModulesLoader,
-      'postcss',
-      'sass?sourceMap',
-    ],
-  });
+  // webpackConfig.module.loaders.push({
+  //   test: /\.scss$/,
+  //   include: cssModulesRegex,
+  //   loaders: [
+  //     'style',
+  //     cssModulesLoader,
+  //     'postcss',
+  //     'sass?sourceMap',
+  //   ],
+  // });
 
   webpackConfig.module.loaders.push({
     test: /\.css$/,
     include: cssModulesRegex,
     loaders: [
-      'style',
-      cssModulesLoader,
-      'postcss',
+      'style-loader',
+      'css-loader?modules=true',
+      // cssModulesLoader,
+      // 'postcss',
     ],
   });
 }
 
 // Loaders for files that should not be treated as CSS modules.
 const excludeCSSModules = isUsingCSSModules ? cssModulesRegex : false;
-webpackConfig.module.loaders.push({
-  test: /\.scss$/,
-  exclude: excludeCSSModules,
-  loaders: [
-    'style',
-    BASE_CSS_LOADER,
-    'postcss',
-    'sass?sourceMap',
-  ],
-});
-webpackConfig.module.loaders.push({
-  test: /\.css$/,
-  exclude: excludeCSSModules,
-  loaders: [
-    'style',
-    BASE_CSS_LOADER,
-    'postcss',
-  ],
-});
+// webpackConfig.module.loaders.push({
+//   test: /\.scss$/,
+//   exclude: excludeCSSModules,
+//   loaders: [
+//     'style',
+//     BASE_CSS_LOADER,
+//     'postcss',
+//     'sass?sourceMap',
+//   ],
+// });
+// webpackConfig.module.loaders.push({
+//   test: /\.css$/,
+//   exclude: excludeCSSModules,
+//   loaders: [
+//     'style-loader',
+//     BASE_CSS_LOADER,
+//   ],
+// });
 
 // ------------------------------------
 // Style Configuration
 // ------------------------------------
-webpackConfig.sassLoader = {
-  includePaths: paths.client('styles'),
-};
+// webpackConfig.sassLoader = {
+//   includePaths: paths.client('styles'),
+// };
 
-webpackConfig.postcss = [
-  cssnano({
-    autoprefixer: {
-      add: true,
-      remove: true,
-      browsers: ['last 2 versions'],
-    },
-    discardComments: {
-      removeAll: true,
-    },
-    discardUnused: false,
-    mergeIdents: false,
-    reduceIdents: false,
-    safe: true,
-    sourcemap: true,
-  }),
-];
+// const postcss = [
+//   cssnano({
+//     autoprefixer: {
+//       add: true,
+//       remove: true,
+//       browsers: ['last 2 versions'],
+//     },
+//     discardComments: {
+//       removeAll: true,
+//     },
+//     discardUnused: false,
+//     mergeIdents: false,
+//     reduceIdents: false,
+//     safe: true,
+//     sourcemap: true,
+//   }),
+// ];
 
 // File loaders
 /* eslint-disable */
 webpackConfig.module.loaders.push(
+  // {
+  //   test: /\.css$/,
+  //   use: [ 'style-loader', 'css-loader' ]
+  // },
   { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
   { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
   { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
