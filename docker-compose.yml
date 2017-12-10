@@ -8,9 +8,9 @@ services:
     # ports:
     #   - "3000:3000"
     env_file:
-      - /home/captain/devshop-vtex/secrets
+      - /home/captain/vault/secrets
     labels:
-      - "traefik.frontend.rule=Host:devshop-vtex.igor-fischer.rocks,devshop-react.fischerops.com"
+      - "traefik.frontend.rule=Host:devshop-vtex.igor-fischer.rocks,devshop-react.fischerops.com,devshop-react.software-unchained.com"
     volumes:
       - /tmp/db:/app/db
     networks:
@@ -23,9 +23,9 @@ services:
     # ports:
     #   - "3001:3001"
     env_file:
-      - /home/captain/devshop-vtex/secrets
+      - /home/captain/vault/secrets
     labels:
-      - "traefik.frontend.rule=Host:devshop-ng2.igor-fischer.rocks,devshop-ng2.fischerops.com"
+      - "traefik.frontend.rule=Host:devshop-ng2.igor-fischer.rocks,devshop-ng2.fischerops.com,devshop-ng.software-unchained.com"
     environment:
       - PROXY_URL=http://devshop-vtex:3000
     networks:

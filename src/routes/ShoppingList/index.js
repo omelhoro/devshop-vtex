@@ -2,7 +2,7 @@ import {injectReducer} from '../../store/reducers';
 
 const path = 'shoppinglist';
 
-export default (store) => ({
+export default store => ({
   path,
   /*  Async getComponent is only invoked when route matches   */
   getComponent(nextState, cb) {

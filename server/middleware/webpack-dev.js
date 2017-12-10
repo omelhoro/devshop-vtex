@@ -22,9 +22,9 @@ export default function (compiler, publicPath) {
   /* eslint-disable no-param-reassign */
   return async function koaWebpackDevMiddleware(ctx, next) {
     const hasNext = await applyExpressMiddleware(middleware, ctx.req, {
-      end: (content) => (ctx.body = content),
+      end: content => (ctx.body = content),
       setHeader(...args) {
-        ctx.set.apply(ctx, args);
+        ctx.set(...args);
       },
     });
 

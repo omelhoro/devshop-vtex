@@ -1,6 +1,7 @@
 blueprints/**/files/**
 coverage/**
 node_modules/**
+node_modules-docker/**
 dist/**
 *.spec.js
 src/index.html

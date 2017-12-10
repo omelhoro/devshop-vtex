@@ -300,8 +300,11 @@ const ACTION_HANDLERS = {
   },
   [USECOUPON]: (state, action) => {
     const preState =
-    {...state, coupon: action.value,
-      discount: action.discount};
+    {
+      ...state,
+      coupon: action.value,
+      discount: action.discount,
+    };
     return {
       ...preState,
       ...calculateSum(preState),
@@ -311,7 +314,7 @@ const ACTION_HANDLERS = {
     return {...shoppinglist};
   },
   [SETDEVLIST]: (state, action) => {
-    const developers = _.uniq(state.developers.concat(action.devs), e => e.login);
+    const developers = _.uniqBy(state.developers.concat(action.devs), e => e.login);
     const pages = Math.ceil(developers.length / state.devsOnPage);
     return ({...state, developers, pages});
   },

@@ -1,0 +1,5 @@
+FROM node:9.2
+RUN mkdir -p /app
+WORKDIR /app
+CMD npm i; npm run dev
+EXPOSE 3000

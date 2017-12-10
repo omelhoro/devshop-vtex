@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Component.scss';
+import classes from './Component.css';
 import moment from 'moment';
 
 /* eslint-disable */
@@ -15,23 +15,25 @@ function getParameterByName(name, url) {
 /* eslint-enable */
 
 const listElement = (ctx, e) => (
-  <div key={`${e.login}-bought`} className="well developer-entry">
-    <div className="media">
-      <div className="media-left media-top">
-        <a href="#">
+  <div key={`${e.login}-bought`} className='well developer-entry'>
+    <div className='media'>
+      <div className='media-left media-top'>
+        <a href='#'>
           <img
-            src={e.avatar_url} alt={e.login} style={{
+            src={e.avatar_url}
+            alt={e.login}
+            style={{
               maxWidth: 100,
             }}
           />
         </a>
       </div>
-      <div className="media-body">
-        <h4 className="media-heading">
+      <div className='media-body'>
+        <h4 className='media-heading'>
           {e.login}
         </h4>
 
-        <table className="table table-bordered table-hovered">
+        <table className='table table-bordered table-hovered'>
           <tbody>
 
             <tr>
@@ -79,12 +81,12 @@ const loadInitialState = (props) => {
   }, 500);
 };
 
-export const ShoppingCard = (props) => (
+export const ShoppingCard = props => (
   <div>
     {loadInitialState(props)}
     <h2 className={classes.counterContainer}>
       Your shopping cart from <i>{moment(props.timestamp).format('HH:mm DD-MM-YYYY')}</i>
-    {' '}
+      {' '}
       with a value of <i>{props.sum}$</i>
     </h2>
     {props.shoppingcard.map(listElement.bind(null, props))}
