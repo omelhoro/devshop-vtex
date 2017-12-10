@@ -20,7 +20,6 @@ pipeline:
       # - npm rebuild levelup
       # - npm rebuild node-sass
       # - npm rebuild phantomjs-prebuilt
-      - echo $${VAULT_PASS}
 
       - VAULT_PASS="$${VAULT_PASS}" ./vault/decrypt.sh
 
