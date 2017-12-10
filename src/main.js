@@ -9,8 +9,8 @@ window.fetch = window.fetch || fetchPL;
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import {useRouterHistory} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
+import { useRouterHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
 
@@ -68,7 +68,6 @@ if (__DEV__ && module.hot) {
   const renderApp = render;
   const renderError = (error) => {
     const RedBox = require('redbox-react'); // eslint-disable-line global-require
-
     ReactDOM.render(<RedBox error={error} />, MOUNT_NODE);
   };
   render = () => {
