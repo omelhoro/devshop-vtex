@@ -12,7 +12,6 @@ const {__DEV__, __PROD__, __TEST__} = config.globals;
 
 debug('Create configuration.');
 
-console.log('config', config);
 const webpackConfig = {
 
   name: 'client',
