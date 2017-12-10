@@ -1,5 +1,5 @@
 import React, {PropTypes as PT} from 'react';
-import classes from './index.scss';
+import classes from './index.css';
 import {dv} from './utils';
 
 const searchBar = ({props}) => (
@@ -15,7 +15,7 @@ const searchBar = ({props}) => (
                 minWidth: 120,
               }}
             >
-              User
+              Usered
             </span>
             <input
               autoFocus={!props.developers.length}

@@ -1,9 +1,9 @@
 import bindClosures from '../../store/binder';
 import React, {PropTypes as PT} from 'react';
-import classes from './index.scss';
+import classes from './index.css';
 
 const listElement = ({element}, {addToCard, removeFromCard, calculatePrice}) => (
-  <div key={`developer-entry-${element.login}`} className="well developer-entry" id={`${element.login}-data`}>
+  <div className="well developer-entry" id={`${element.login}-data`}>
     <div className="media">
       <div className="media-left media-top">
         <a href="#">

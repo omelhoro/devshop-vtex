@@ -1,13 +1,15 @@
 import React, {PropTypes as PT} from 'react';
-import classes from './index.scss';
+import classes from './index.css';
 import ListElement from './ShoppingListEntry';
 import ListShoppingCard from './ShoppingCardEntry';
 import SearchBar from './SearchBar';
 import Modal from './ConfirmModal';
 import {priceFormatWithDiscount, Pagination, loadingBar} from './MiniComponents';
 
+
+
 export const ShoppingList = (props) => (
-  <div>
+  <div className="centerCol">
     <SearchBar props={props} />
 
     {props.loading ? loadingBar(props) : ''}
@@ -18,7 +20,7 @@ export const ShoppingList = (props) => (
         {props
           .developers
           .slice(props.currentPage * props.devsOnPage, (props.currentPage + 1) * props.devsOnPage)
-          .map(e => <ListElement props={props} element={e} />)}
+          .map(e => <ListElement key={`developer-entry-${e.login}`} props={props} element={e} />)}
         <Pagination props={props} />
       </div>
       <div className="col-sm-4">

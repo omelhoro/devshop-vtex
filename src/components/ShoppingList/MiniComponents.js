@@ -1,7 +1,7 @@
 import React, {PropTypes as PT} from 'react';
 import bindClosures from '../../store/binder';
 import * as _ from 'lodash';
-import classes from './index.scss';
+import classes from './index.css';
 
 export const priceFormatWithDiscount = ({sumOriginal, discount, sum}) => (
   <div className="text-center">
